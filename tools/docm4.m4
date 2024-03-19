@@ -46,7 +46,7 @@ define([DOCM4_BINTOOLS],
 include(bintools.m4)
 changecom([#],)dnl
 
-# End of MakeBintools.
+# End of Bintools.
 # -------------------------------------------------------------
 ])
 
@@ -69,39 +69,6 @@ define([DOCM4_INSTRUCTIONS],
  rules to compile, execute and inspect the contents of the source and object
  the examples are built and executed.
 ])
-
-
-# define([DOCM4_UPDATE_AUTHOR_INFO],
-# [
-#   Please, *do not* forget to
-
-#     - create a file AUTHORS and edit it with your name
-#     - edit heading comments in all source files with your data
-
-#   Open-Source literacy time:
-
-#   Every source file of SYSeg contains a copyright and licensing statement. 
-
-#   But remember: the authorship of your own source code --- even if you borrow
-#   parts of SYSeg --- should be assigned to you, the author of your work; not
-#   to the original SYSeg author(s). Nevertheless, being your source code a
-#   derivative work of SYSeg, credits are due to SYSeg author(s), whence
-#   making a propper attribution to SYSeg is order.
-  
-#   Also, bear in mind that the SYSeg's licence requires your derivative
-#   work to be distributed under terms no more restrictive than those enforced
-#   by the license of the original work --- if in doubt, keeping the original
-#   SYSeg licence is perfectly safe.
-
-#   One way to claim the copyright of your derivative work and attribute credits
-#   to the original work is by adding the following notice at the top of every
-#   source file of your project (e.g. keeping the original DOCM4_PROJECT
-#   license):
-
-#   The 'make export' rule of the script will do all that for you.
-#   Just edit the empty fields.
-  
-# ])
 
 
 
@@ -152,7 +119,7 @@ define([DOCM4_BINTOOLS_DOC],
      ld			linker script.
 
  Some examples allow alternative build recipes which can be selected
- by passing the command-line variable ALT=<number> to 'make'. See bellow.
+ by passing the command-line variable 'ALT=<number>' to 'make'. See bellow.
 
  NEEDED SOFTWARE
 
@@ -173,10 +140,10 @@ define([DOCM4_BINTOOLS_DOC],
  - xorriso	 1.5.2-1	(depending on your computer's BIOS)
  - hexdump	 POSIX.2	(binary editor)
  
- CONVENIENCY RULES 
+ CONVENIENCE RULES 
 
 
- * For buiding and inspecting, use
+ * For building and inspecting, use
 
    make					     Build the default target.
 
@@ -334,14 +301,14 @@ endif
 ])
 
 ##
-## Programing exercise directions with pack
+## Programming exercise directions with pack
 ##
 define([DOCM4_EXPORT_DIRECTIONS],
 [
  Directions for the exercise
  ------------------------------
 
- Within the exrcise directory, invoke the make rule
+ Within this directory, invoke the 'make' rule
 
     $ make export             
 
@@ -371,56 +338,44 @@ define([DOCM4_EXPORT_DIRECTIONS],
   found in the directory syseg/tools. It will export SYSeg files
   in a format suitable to be reused by external projects.
 
-DOCM4_UPDATE_AUTHOR_INFO
 ])
 
 define([DOCM4_DELIVERY_DIRECTIONS],
 [
-  How to deliver the exercise
-  ------------------------------
+ How to deliver the exercise
+ ------------------------------
   
-  If you're exploring the exercise as part of a trainning program,
-  chances are that your instructor is following the delivery workflow
-  suggested by SYSeg. If that is the case, when you're done with the
-  activity, you should be asked to upload your work into a repository
-  managed by a version-control system (VCS) --- most probably Git.
+ If you're exploring the exercise as part of a training program,
+ chances are that your instructor is following the delivery workflow
+ suggested by SYSeg. If that is the case, when you're done with the
+ activity, you should be asked to upload your work into a repository
+ managed by a version-control system (VCS) --- most probably Git.
 
-  For this purpose, you must have already created your online repository
-  in the recommended platform (e.g. GitHub or GitLab).
+ For this purpose, you must have already created your online repository
+ in the recommended platform (e.g. GitHub or GitLab).
 
-  To deliver your programming exercise just commit your changes and push
-  them into to the mainstream repository.
+ To deliver your programming exercise just commit your changes and push
+ them into to the mainstream repository.
 
-  You may commit partial changes even before completing the exercise. That
-  may be a convenient way to share ideias and ask for help.
+ You may commit partial changes even before completing the exercise. That
+ may be a convenient way to share ideas and ask for help.
 
-  When you belive your work is complete, mark your final revision with a
-  tag. Each exercise should specify a delivery tag. For instance, if the
-  exercise specifies the tag 'foo', proceed as follows
+ When you believe your work is complete, mark your final revision with a
+ tag. Unless the exercise specification inform differently, use the tag
+ 'done' for your final delivery. If you need to submit a revision after
+ that, use the tag 'rev1', 'rev2' and so on.
 
-     $ git tag foo
-     $ git push origin foo
+ To tag your delivery:
 
-  The instructor will know you are finished with the exercise.
+     $ git tag done
+     $ git push origin done
 
-  If further changes are required, please use 'foo.1', 'foo.2' etc.
+ The instructor will know you are finished with the exercise.
 
-  Note: please, unless otherwise explicitly specified, commit only source
-  files (don't commit object or executable files). Usually, the exercise
-  specification will list the required files.
-
-  Please stick to the following convention:
-
-  - Unless otherwise specified, create a subdirectory under the root of
-    your project tree with the same name as the exercise. For instance,
-    if you are working on exercise `syseg/try/bar`, create a subdirectory
-    `bar` at the root of your project directory.
-
-  - If a delivery tag is not specified, use the name of the current directory,
-    i.e., if the exercise is within 'ssyseg/try/baz', use the tag 'baz'.
-
-
-
+ Note: please, unless otherwise explicitly specified, commit only source
+ files (i.e. don't commit object files and other items that can be
+ generated by the build process).
+  
 ])
 
 # Shortcut for export and delivery directions.
@@ -444,36 +399,45 @@ changecom([#],)
 ])
 
 ##
-## Create pack-distribution (subprojects).
+## Create pack-distribution (sub-projects).
 ##
 define([DOCM4_EXPORT],
 [changecom(,)
-# Self-contained pack distribution.
-#
-# make syseg-export     creates a tarball with the essential files, which
-#       	        can be distributed independently of the rest of
-#			this project.
-#
-# A pack distribution contain all the items necessary to build and run the
-# relevant piece of software. It's useful,a for instance, to bundle
-# self-contained subsections of DOCM4_PROJECT meant to be delivered as
-# programming exercise assignments or illustrative source code examples.
-#		
-# In order to select which files should be included in the pack, list them
-# in the appropriate variables
-# 
-# EXPORT_FILES_C    = C files (source, headers, linker scripts)
-# EXPORT_FILES_MAKE = Makefiles
-# EXPORT_FILES_TEXT = Text files (e.g. README)
-# EXPORT_FILES_SH   = Shell scripts (standard /bin/sh)
-#
-# Except by text files, all other files will have their heading comment
-# (the very first comment found in the file) replaced by a corresponding
-# standard comments containing boilerplate copyright notice and licensing
-# information, with blank fields to be filled in by the pack user.
-# Attribution to DOCM4_PROJECT is also included for convenience.
+## Self-contained pack distribution.
+##
+## This rule is meant for SYSeg users to create a stand-alone bundle
+## containing a modified copy of a proposed exercise, modified to work
+## outside the SYSeg source tree. The user can then copy the exported
+## exercise into their own project and develop the implementation challenge.
+##
+## If the present file is found in an already exported project, this
+## rule has no purpose and should not produce any result.
+##
+##
+## make syseg-export     creates a tarball with the essential files, which
+##       	        can be distributed independently of the rest of
+##			this project.
+##
+## A pack distribution contain all the items necessary to build and run the
+## relevant piece of software. It's useful,a for instance, to bundle
+## self-contained subsections of DOCM4_PROJECT meant to be delivered as
+## programming exercise assignments or illustrative source code examples.
+##		
+## In order to select which files should be included in the pack, list them
+## in the appropriate variables
+## 
+## EXPORT_FILES_C    = C files (source, headers, linker scripts)
+## EXPORT_FILES_MAKE = Makefiles
+## EXPORT_FILES_TEXT = Text files (e.g. README)
+## EXPORT_FILES_SH   = Shell scripts (standard /bin/sh)
+##
+## Except by text files, all other files will have their heading comment
+## (the very first comment found in the file) replaced by a corresponding
+## standard comments containing boilerplate copyright notice and licensing
+## information, with blank fields to be filled in by the pack user.
+## Attribution to DOCM4_PROJECT is also included for convenience.
 
-TARNAME=$1-$2
+TARNAME=$1
 
 changecom([#],)
 
@@ -493,6 +457,7 @@ do_export:
 	done
 	touch $(TARNAME)/.dist
 	tar zcvf $(TARNAME).tar.gz $(TARNAME)
+	rm -rf $(TARNAME) 
 
 clean-export:
 	rm -f $(TARNAME).tar.gz
@@ -502,16 +467,18 @@ clean-export:
 
 ])
 
-## Template for binary and library build using GNU make and gcc capabilities.
-## These rules makes use of GNU extensions and are not fully portable.
-## The code exceprt if part MAKEGYVER, part [DOCM4_PROJECT].
+## Template for binary and library build using GNU make and gcc capabilities.              
+## These rules makes use of GNU extensions and are not fully portable.                     
+## The code exceprt if part MAKEGYVER, part [DOCM4_PROJECT].                               
 define([DOCM4_MAKEGYVER],[
-## ----------------------------------------------------------------------
-## This piece of code is part of MakeGyver.
-##
+## ----------------------------------------------------------------------                  
+## This piece of code is part of MakeGyver.                                                
+##                                                                                         
 include(Makegyver.mk)
 
-## End of MakeGyver
-## ----------------------------------------------------------------------
+## End of MakeGyver                                                                        
+## ----------------------------------------------------------------------                  
 ])
+
+
 divert(0)dnl

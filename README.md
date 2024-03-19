@@ -6,76 +6,115 @@
    This file is part of SYSeg, available at https://gitlab.com/monaco/syseg.
 -->
 
- Copyright (c) 2021 Monaco F. J. <monaco@usp.br>. 
+ _Copyright (c) 2021 Monaco F. J. <monaco@usp.br>_ 
 
- SYSeg is free software and can be distributed under the terms of GNU General
- Public License version 3 of the license or, at your discretion, any later
- version.
+ _SYSeg is free software and can be distributed under the terms of GNU General
+ Public License version 3 of the license or, at your discretion, any later 
+ version. See section Licensing bellow for further information._
 
- Third-party source-code files distributed along with SYSeg are made available
- under their respective licenses, as annotated in each individual file.
+ SYSeg - System Software by Example
+ ========================================
+ SYSeg (System Software, e.g.) is a collection of source-code examples and 
+ programming exercises intended to illustrate general concepts and techniques 
+ related to system software design and implementation. 
 
- See the terms of each license under the directory LICENSES. 
+About
+-------------------------------------------
+ 
+ SYSeg has been compiled from class notes in undergraduate courses in
+ Computer Science and Engineering, and is meant to  be useful for students
+ and instructors exploring low-level programming.
+
+ Covered topics include code examples exploring
+ 
+  - runtime system _(shared/dynamic libraries,  API implementation etc.)_
+  
+  - application binary interface _(calling conventions, memory alignment etc.)_
+  
+  - program build chain _(preprocessor, compiler, assembler, linker etc.)_
+  
+  - program execution _(dynamic linking, relocation, position-independent-code etc.)_
+  
+  - build automation systems _(make, code portability, autoconf/automake etc.)_
+  
+  - operating systems implementation: _(hardware interface, POSIX API, etc.)_
+  
+  - and other related subjects.
+
+ SYSeg official repository is at https https://gitlab.com/monaco/syseg.
 
 
+Build and Install
+ -----------------------------------------------
 
-# SYSeg - System Software by Example
+ Before you dig into the examples, read this.
+ 
+ Most code examples and programming exercises require auxiliary artifacts 
+ (including the documentation!) which must be built beforehand. 
 
-SYSeg (System Software, e.g.) is a collection of code examples and programming
-exercises intended for illustration of general concepts and techniques
-concerning to system software design and implementation. The package, compiled
-from computer sciences and engineering class notes, is meant to be useful
-as a learning resource for students and instructors exploring low-level
-system programming,
+ In order to get those items built you **must** perform the setup procedure.
 
-Code examples and companion documentation cover topics such as operating
-systems implementation, program build chain (pre-processor, compiler,
-assembler, linker), runtime system (shared/dynamic libraries, POSIX API etc.),
-application binary interface (ABI: calling conventions), dynamic linking
-(shared objects, relocation, position-independent-code), build automation
-systems and other related subjects.
+ Please, read `doc/syseg.md` and proceed as explained.
 
-SYSeg official repository is at https https://gitlab.com/monaco/syseg.
+ There you will also find instructions on how to use SYSeg code examples,
+ as well as the requirements and dependencies your system needs to meet
+ in order to build and execute SYSeg tools.
 
-## Before you dig into the examples (IMPORTANT)
+ **IMPORTANT**
 
-- Most code examples and programming exercises require auxiliary artifacts 
-  (including the documentation!) which must be built beforehand. 
+ In case you have rushed through this file and missed some detail, 
+ please do take notice of the directions above. 
 
-  In order to get those items built you **must** perform the setup procedure.
+ They'll assuredly save you time, should you want to try SYSeg.
 
-  Please, read `doc/syseg.md' and proceed as explained.
+ This file is named `README` for a reason.
 
-  There you will also find instructions on how to use SYSeg code examples,
-  as well as the requirements and dependencies your system needs to meet
-  in order to build and execute SYSeg tools.
-
-## REALLY IMPORTANT
-
-   In case you have missed it, do take notice of the directions above.
-
-   The file is named `README` for a reason.
-
-## Overview
-
-SYSeg contents. 
+ Content overview
+ ------------------------------
+ 
+ SYSeg contents. 
 
  - Directory `eg`    contains the main source code examples.
  - Directory `try`   contains suggested programming exercises.
  - Directory `tools` contains auxiliary tools used by examples and exercises.
  - Directory `doc`   contains SYSeg documentation.
- - Directory `extra` contains additional material about advanced topics,
-   	     	     non-standard features, side notes, and hacker lore.
- - Directory 'draft' contains work-in-progress material
-   	     	     (likely incomplete or buggy)
+ - Directory `extra` contains side notes, arcane features and hacker lore.
+ - Directory `draft` contains work-in-progress material (likely buggy)
 
-   The `README` file in each sub-directory further details its contents.
+ Each subdirectory contains a `README` file further explaining its contents.
+ 
 
-## Contributing
+ Contributing
+ ------------------------------
+ 
+ SYSeg is a work-in-progress developed and, as such, may contain
+ suboptimal code and potential innacuracy in technical explanations as
+ result of reliance on imprecise or misleading references. If you ever
+ detect one such problem, it would be great if you could drop the
+ author a note.
 
- Bug reports and suggestions are always welcome: feel free to contact the
- author directly or open an issue at the version-control repository.
+ Bug reports and suggestions are always welcome.
 
- Should you like to contribute code, please, refer to `CONTRIBUTING.md`.
+ Feel free to open and issue at the version-control repository.
 
- The file 'AUTHORS' lists all contributors and acknowledgments.
+ The file 'AUTHORS' lists all contributors and acknowledgments, with
+ respective contact information.
+
+ Should you like to contribute code, please, refer to the file
+ `CONTRIBUTING.md`.
+ 
+ Licensing
+ -----------------------------
+ 
+ SYSeg (system-software, _exempli gratia_)
+ Copyright (c) 2021 Monaco F. J. <monaco@usp.br>. 
+
+ SYSeg is free software and can be distributed under the terms of GNU General
+ Public License version 3 of the license or, at your discretion, any later 
+ version. Third-party source files distributed along with SYSeg are made 
+ covered by their respective licenses, as annotated in each individual file.
+
+ See the terms of each license under the directory LICENSES. 
+
+ 
+ 
