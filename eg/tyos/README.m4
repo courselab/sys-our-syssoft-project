@@ -16,6 +16,9 @@ dnl       the build instructions in the README file at the top of SYSeg's source
 dnl       tree (yep, it's called README for a reason).
 
 include(docm4.m4)
+
+DOCM4_REVIEW
+
  Boot loader
  ==============================================
 

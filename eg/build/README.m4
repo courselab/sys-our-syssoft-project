@@ -17,13 +17,10 @@ dnl       tree (yep, it's called README for a reason).
 
 include(docm4.m4)
 
+DOCM4_REVIEW
+
  BUILD PROCESS
  ==============================
-
-DOCM4_DIR_NOTICE
-
- Overview
- ------------------------------
 
  This directory contains a series of examples illustrating the process
  by which a program is transformed from its source into its executable form,
