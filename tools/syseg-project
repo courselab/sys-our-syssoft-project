@@ -6,9 +6,10 @@
 #
 #    This file is part of SYSeg, available at https://gitlab.com/monaco/syseg.
 
+
 function usage()
 {
-    echo "Usage: $(basename $@) [options] <path>"
+    echo "Usage: $(basename $0) [options] <path>"
 }
 
 
