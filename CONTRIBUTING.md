@@ -41,12 +41,16 @@ Contributing to SYSeg
 
     Do not submit a PR/MR that is not related to an open issue.
 
- 3. Go have a coffee, or a beer, or wine, because you deserve it.
+ 3. Go have a coffee, or a beer, as you truly deserve it.
 
  Developer tools
  ------------------------------
 
- The developer tools require that you have Git installed and configured:
+ SYSeg provide developers with a set of helper tools to assist you in the
+ development process. They can be found in directory `tools`.
+
+ To work properly, helper tools require that you have Git installed and
+ properly configured, in special:
 
  ```
    git config [--global] user.name  <your name>
@@ -54,7 +58,7 @@ Contributing to SYSeg
  ```
  SYSeg uses Git under the hood to perform some tasks.
 
- * Quick intro:
+ * Available tools:
 
    - `syseg-newfile`    creates a new file in your project
    - `syseg-export`     copy a source file from SYSeg into your project
@@ -66,11 +70,28 @@ Contributing to SYSeg
 
    The script should create the file, add some comments and, possibly, some
    boilerplate code based on the file type (i.e. the file-name extension).
-
+   It will also annotate the file with copyright and licensing
+   information accordingly.
+   
  * To perform a lint check to check REUSE compliance (before committing):
 
    `tools/syseg-reuse -L`
 
+   Make sure that it passes all the tests before committing.
+
+ * To export a file from SYSeg to another project:
+
+   `tools/syseg-export <file-name> <destination-path>`
+
+    The script should copy the files and perform any necessary change.
+
+ * The following script may be used by the use to create a stand-alone
+   bundle containing a modified copy of a proposed exercise, modified to
+   work outside the SYSeg source tree.
+
+   `tools/syseg-project <destination path>`
+
+ Use option `-h` for help.
 
  Code convention
  ------------------------------
@@ -78,9 +99,9 @@ Contributing to SYSeg
  Oh, that.
 
  Code convention always tend to be a sensitive topic among programmers as it calls
- forth personal convictions and the weight of beloved traditions. An often,
- preferences vary largely. With that, please try go easy with the choices made
- in this project.
+ forth personal convictions and the weight of beloved traditions. As often,
+ preferences vary largely. With that, we humbly as you to be indulgent about the
+ choices made in this project.
  
  * Symbol names, comments, file names etc. in English.
 
@@ -117,9 +138,9 @@ Contributing to SYSeg
 
  Suffixes:
 
-   - `-alpha`     wrong or incomplete implementation to exemplify problems
-   - `-beta`      working example, but suboptimal or inelegant implementation
-   - (no suffix)  working, intended implementation
+   - `-alpha`       wrong or incomplete implementation to exemplify problems
+   - `-beta`        working example, but suboptimal or inelegant implementation
+   - `(no suffix)`  working, intended implementation
 
  * Comments are text. Use caption and punctuation accordingly.
 
@@ -167,40 +188,61 @@ Contributing to SYSeg
 
  - Semantic versioning 2.0.0 [3]
 
- - Conventional Commits 1.0.0 [4] (see types bellow)
+ SUPPORT BRANCH NAMING (for PR/MR requests)
 
- - Keep a ChangeLog [5]
-
- Complementary notes:
-
- Permanent branch names:
-
- `main` (former `master`) and `dev` (for GitFlow `develop`)
+ When creating a support branch to address an issue, name the branch
  
- Commit messages
 
- `<type>/issue-number/descriptive-words
+  `<purpose>/<issue number>/<short-descriptive-mnemonic>`
 
- where `<type>` is one of
-
- - `fix`:   fix a bug
- - `feat`:  add new feature
- - `build`: changes affecting the build 
- - `perf`:  tidy code (other than the above) and repository
- - `doc`:   modify internal or external documentation
- - `test`:  add or modify tests
- - `tmp`:   a temporary branch for some other purpose (not PR/MR)
-
- Branch names:
-
- `<purpose>/<issue number>/<short-descriptive-mnemonic>`
 
  where `purpose` is one of the following:
 
- * `feature`:   adding, modifying or removing a feature
- * `bugfix`:    fixes a bug in the development branch
- * `hotfix`:    fixes a but in the public (main) branch
- * `wip`   :    work-in-progress (to be converted when done)
+ - `fix`   :   fixes a bug or unmeant requirement 
+ - `feat`  :   adds or modify a feature
+ - `doc`   :   modify or extend documentation
+ - `hot`   :   modifies the stable branch
+ - `tidy`  :   performs repository maintenance
+
+ In addition, we also allow the following exceptional kind of
+ branches, not linked to a particular issue:
+
+ - `wip`   :   temporary, works-in-progress branch
+ - `duty`  :   duty handled outside the regular protocols
+ - `minor` :   very small ad hoc changes for cosmetic purposes
+
+ In this case, the branch should be named
+
+   `<purpose>/short-descriptive-mnemonic`
+
+ COMMIT MESSAGES
+
+ We suggest a lax version of the ideas outlined in Conventional
+ Commits [4], but using a more informal, fluid approach. 
+
+ A recommended format for messages is
+
+ `<purpose> : Short description`
+
+ where the purpose is one of the support branch types.
+
+ Ideally, each commit should be of only one type. In practice, though,
+ it's reasonable to group changes in a single commit for efficiency,
+ specially when those are related. In those cases, it's ok to use
+
+ ```
+  <purpose 1> : Short description 1
+  <purpose 2> : Short description 2
+  ...
+ ```
+
+ If it helps to understand the context, do not refrain from adding a
+ paragraph further explaining the commit.
+
+ OTHER CONVENTIONS
+
+ We intend to adhere to Keep a ChangeLog [5] in a near future.
+
 
  References
  ------------------------------
