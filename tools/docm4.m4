@@ -25,6 +25,8 @@ define([DOCM4_DEPS],_TOOL_PATH/docm4.m4 TOOL_PATH/bintools.m4)]
 dnl A short head notice that can be used in the README file
 dnl describing the contents of a directory.
 
+dnl Deprecated: do not use this macro anymore.
+dnl
 define(DOCM4_DIR_NOTICE,
 [
 dnl   The contents of this directory are part of DOCM4_PROJECT,
@@ -467,6 +469,19 @@ clean-export:
 
 ])
 
+
+define([DOCM4_REVIEW],[
+
+##
+##  NOTE: The contents of this directory are being reviewed for assessment
+##        and potential revision of source code and documentation.
+##
+
+])
+
+## Warning: this is marked to be deprecated.
+##
+##
 ## Template for binary and library build using GNU make and gcc capabilities.              
 ## These rules makes use of GNU extensions and are not fully portable.                     
 ## The code exceprt if part MAKEGYVER, part [DOCM4_PROJECT].                               

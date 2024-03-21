@@ -17,6 +17,8 @@ dnl       tree (yep, it's called README for a reason).
 
 include(docm4.m4)
 
+DOCM4_REVIEW
+
  Application binary interface
  ==============================
 

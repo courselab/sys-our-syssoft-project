@@ -17,12 +17,10 @@ dnl       tree (yep, it's called README for a reason).
 
 include(docm4.m4)
 
+ DOCM4_REVIEW
+
  Application binary interface
  ==============================
-DOCM4_DIR_NOTICE
-
- Overview
- ------------------------------
 
  This directory contains a series of source code files illustrating different
  aspects of the x86 application binary interface and related concepts. It

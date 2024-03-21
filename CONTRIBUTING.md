@@ -126,11 +126,6 @@ Contributing to SYSeg
  Contribution licensing
  ------------------------------
 
- In case your contribution apply substantial modifications modification in a
- source-code or documentation file --- say it's considerably more than
- a simple typo correction or small bug fix --- you are entitled to
- claim copyright of your work.
-
  If you have substantially modified an existing source or documentation
  file --- say  it's considerably more than a simple typo correction or
  small bug fix --- you are entitled to have your name added to the copyright
