@@ -45,20 +45,20 @@ ORIGIN=$(realpath ${BASH_SOURCE%/*})
 
 SRC=$(cat $ORIGIN/../.srcdir 2> /dev/null)
 
-case $ORIGIN in
+# case $ORIGIN in
     
-    "$SRC/tools")		# Calling from source tree"
-	REUSE_PATH="$SRC/.local/bin"
-	;;
-
-    "$HOME/.syseg/bin")		# Calling from install dir
-	REUSE_PATH="$ORIGIN"
-	;;
-
-    *)				# Calling from user project
-	REUSE_PATH="$HOME/.syseg/bin"
-	;;
-esac
+#     "$SRC/tools")		# Calling from source tree"
+# 	REUSE_PATH="$SRC/.local/bin"
+# 	;;
+#
+#     "$HOME/.syseg/bin")		# Calling from install dir
+# 	REUSE_PATH="$ORIGIN"
+# 	;;
+#
+#     *)				# Calling from user project
+# 	REUSE_PATH="$HOME/.syseg/bin"
+# 	;;
+# esac
 
 REUSE_PATH=$HOME/.syseg/bin
 
@@ -122,6 +122,8 @@ fi
 
 # Call the actual reuse tool.
 
+
+echo ">> Invoking reuse from $REUSE_PATH"
 
 function do_annotate(){
     $REUSE_PATH/reuse annotate --copyright="$COPYRIGHT" --year="$YEAR" --license="$LICENSE" --template=syseg $1 $extra_options $f

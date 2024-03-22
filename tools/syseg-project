@@ -81,6 +81,13 @@ EMAIL="$(git config user.email)"
 LICENSE="GPL-3.0-or-later"
 YEAR="$(date +%Y)"
 
+REPO=$(git config remote.origin.url |sed 's/:/\//'| sed 's/git@/https:\/\//' )
+if test -z "$REPO"; then
+    echo "This script needs to be invoked from a repository"
+fi
+
+REPO="<FILL-IN-THIS-FIELD>"
+
 function do_annotate(){
     $REUSE_PATH/reuse annotate --copyright="$AUTHOR" --year="$YEAR" --license="$LICENSE" --template=syseg $2 $1 > /dev/null
 }
@@ -210,10 +217,37 @@ cat<<EOF > $FILEPATH/.tools/readme.md
 
  * If you want to create a new file, use the proper script
 
-   \`\$PROJ/.tools/syseg-newfile <destination-path>/<file-name>
+   \`\$PROJ/.tools/syseg-newfile <destination-path>/<file-name>\`
 
    The script should create the file, add some comments and, possibly, some 
    boilerplate code based on the file type (i.e. the file-name extension).
+
+   BUG ALERT:  If your current directory is, say \`\$PROJ\/foo\`, it's possible
+               that the helper script fails if you invoke it from there:
+
+	       \`\`\`
+
+	       cd foo
+	       ../.tools/syseg-newfile bar   (this mail fail)
+
+	       \`\`\`
+
+	       This is a known issue and is expected to be fixed.
+
+	       As a workaround, invoke the helper tools (tools/syseg-*) from
+	       the root of your project tree:
+
+	       \`\`\`
+
+	       cd foo
+	       cd ..
+	       ./tools/syseg-newfile foo/bar   (use this, instead)
+
+	       \`\`\`
+
+
+   Remember, you must have SYSeg installed (\`make install\`).
+	       
 
  * SYSeg is free software and you may reuse its source code.
 
@@ -295,6 +329,16 @@ add_link reuse
 echo "Creating $FILEPATH/.reuse"
 #test ! -d $FILEPATH/.reuse && ln -s $HOME/.syseg/.reuse $FILEPATH
 test ! -d $FILEPATH/.reuse && cp -r $SRC/.reuse $FILEPATH
+
+#REPO=$(git config remote.origin.url | sed 's/git@/https:\//' | sed 's/:/\//')
+
+cat<<EOF > $FILEPATH/.reuse/dep5
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: $(basename $FILEPATH)
+Upstream-Contact: $AUTHOR <$EMAIL>
+Source: $REPO
+
+EOF
 
 # Update licenses and lint-check
 

@@ -21,32 +21,33 @@ include(docm4.m4)dnl
 ## Relevent files for this exercise.
 ##
 
-all: # hw-hex hw-s hw-c
-	@echo "Edit this rule"
+all: hw.bin
 
-hw-hex.bin : hw.hex
-	@echo "Edit this rule"
+hw.bin : hw.S hwasm
+	./hwasm hw.S hw.bin
 
-hw-s.bin : hw.S
-	@echo "Edit this rule"
+hwasm : hwasm.c
+	gcc -Wall --ansi hwasm.c -o hwasm
 
-hw-c.bin : hw.c
-	@echo "Edit this line"
+hw2.bin: hw2.o
+	ld -melf_i386 --oformat=binary -Ttext=0x7c00 hw2.o -o h2.bin
 
-hex2bin : hex2bin.c
-	gcc $< -o $@
+hw2.o: hw.S
+	as --32 hw.S -o hw.o
+
 
 .PHONY: clean
 
 clean:
-	rm -rf *.bin *.o *.s hex2bin
+	rm -rf *.bin *.o
+	rm -f *~ 
 
 # Create stand-alone distribution
 
-EXPORT_FILES = hw.hex hw.S hw.c Makefile README TOOL_PATH/hex2bin.c TOOL_PATH/debug.h
+EXPORT_FILES = Makefile README
 
-DOCM4_EXPORT([hw],[0.1.1])
-
-# Include Make Bintools
 
 DOCM4_BINTOOLS
+DOCM4_EXPORT([hw],[0.1.1])
+UPDATE_MAKEFILE
+

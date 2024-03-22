@@ -40,11 +40,11 @@ define([DOCM4_BINTOOLS],
 [changecom(,)dnl
 ## Bintools: convenience rules for inspecting binary files
 ##
-## SYSeg's Bintools is a collection of Makefile rules aimed as shortcut for
-## invoking binary inspection utilities. It contains handy Make rules for
+## SYSeg's Bintools is a collection of Makefile rules for invoking
+## binary-inspection utility programs. It contains handy shortcuts for
 ## disassembling objects, comparing files, creating bootable images, invoking
 ## platform emulators and other facilities. Some shortcuts are ad hoc rules
-## crafted under poetic license and may depart from conventional Make usage.
+## crafted under a poetic license and may depart from conventional Make usage.
 include(bintools.m4)
 changecom([#],)dnl
 
@@ -285,7 +285,7 @@ define([DOCM4_CLOSING_WORDS],
 define([UPDATE_MAKEFILE],
 [
 # Update Makefile from Makefile.m4 if needed, and then invoke make again.
-# If the source is from a pack-distribution, the lack of Makefile.m4
+# If the source is from a distribution bundle, the lack of Makefile.m4
 # inhibits the updating. 
 
 ifndef UPDATED
@@ -401,11 +401,11 @@ changecom([#],)
 ])
 
 ##
-## Create pack-distribution (sub-projects).
+## Create a distribution bundle (sub-projects).
 ##
 define([DOCM4_EXPORT],
 [changecom(,)
-## Self-contained pack distribution.
+## Self-contained distribution bundle for stand-alone usage.
 ##
 ## This rule is meant for SYSeg users to create a stand-alone bundle
 ## containing a modified copy of a proposed exercise, modified to work
