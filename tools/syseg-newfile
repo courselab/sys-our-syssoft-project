@@ -154,6 +154,8 @@ EOF
          	
 esac
 
+echo ">> Invoking newfile from $ORIGIN"
+
 tmpfile=$(mktemp)
 $ORIGIN/syseg-reuse -c "$(git config user.name) <$(git config user.email)>" -y "$(date +%Y)" -x  "--template=$template" "$2" $FILEPATH 2> $tmpfile
 if test $? -ne 0; then
