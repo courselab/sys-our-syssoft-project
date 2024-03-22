@@ -327,10 +327,13 @@ add_link syseg-project
 add_link reuse
 
 echo "Creating $FILEPATH/.reuse"
-#test ! -d $FILEPATH/.reuse && ln -s $HOME/.syseg/.reuse $FILEPATH
+
 test ! -d $FILEPATH/.reuse && cp -r $SRC/.reuse $FILEPATH
 
-#REPO=$(git config remote.origin.url | sed 's/git@/https:\//' | sed 's/:/\//')
+cd $FILEPATH && REPO=$(git config remote.origin.url | sed 's/:/\//' | sed 's/git@/https:\/\//'  )
+
+echo "Repo is $REPO"
+exit 1
 
 cat<<EOF > $FILEPATH/.reuse/dep5
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
@@ -339,6 +342,9 @@ Upstream-Contact: $AUTHOR <$EMAIL>
 Source: $REPO
 
 EOF
+
+
+
 
 # Update licenses and lint-check
 
