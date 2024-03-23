@@ -105,13 +105,15 @@ Contributing to SYSeg
  
  * Symbol names, comments, file names etc. in English.
 
- * For C code, we stick with snake case, with symbols (variables and function
-   names) in lowercase, and macros in uppercase. We use exclusively C multi-line
-   comments. Filenames in snake lowercase, with version suffix according to
-   semantic versioning schema.
+ * For C code, we stick with the tradition: snake case, with symbols (variables
+   and function names) in lowercase, and macros in uppercase. We use exclusively
+   C multi-line comments. Filenames in lowercase.
 
- * Examples should use only the native runtime C library; no third-party
-   libraries (exceptions may be discussed, but have not being needed as yet).
+ * Version suffix according to semantic versioning [3] schema.
+
+ * Examples in C should use only the native runtime POSI-C library; no
+   third-party libraries (exceptions may be discussed, but have not being
+   needed as yet).
 
  * Blocks open in the next line for both functions and flow control statements
    (yes, I know, I know...)
@@ -136,11 +138,11 @@ Contributing to SYSeg
 
    -`ld`   linker script.
 
- Suffixes:
+ Development-stage suffixes:
 
    - `-alpha`       wrong or incomplete implementation to exemplify problems
    - `-beta`        working example, but suboptimal or inelegant implementation
-   - `(no suffix)`  working, intended implementation
+   - `(no suffix)`  working (hopefully), intended implementation
 
  * Comments are text. Use caption and punctuation accordingly.
 
@@ -148,9 +150,9 @@ Contributing to SYSeg
  ------------------------------
 
  If you have substantially modified an existing source or documentation
- file --- say  it's considerably more than a simple typo correction or
+ file --- say it's considerably more than a simple typo correction or
  small bug fix --- you are entitled to have your name added to the copyright
- notice and to the `AUTHORS` file, should you like so.
+ notice [1] and to the `AUTHORS` file, should you desire.
 
  By submitting your contribution you agree that it will be available under the
  same license as SYSeg (GNU GPL vr. 3 or later).
@@ -158,24 +160,23 @@ Contributing to SYSeg
  Code of conduct
  ------------------------------
 
- Just be considerate and inclusive face diversity.
+ Be considerate and inclusive face diversity.
 
- ..it happens
+ I have a matter.
  ------------------------------
 
- SYSeg contains source-code examples and implementation challenges collected
- by the author from class notes and programming exercises throughout the teaching
- practice in undergraduate courses in Computer Sciences and Engineering. As such
- the material is a work-in-progress endeavor and may contain (or, certainly
- contains) incomplete, suboptimal, or even imperfect code. Let's hope not, but 
- potential inaccuracy in technical explanations are not guaranteed not to
- happen as result of reliance on misleading references or imprecise
- documentation.
+ ..it happens.
 
- If you ever detect one such problem, it would be great if you could drop the
- author a note. Your input will be very appreciated, as it will help to improve
- the material. Special thanks shall be gratefully engraved in the source comments
- and documentation.
+ SYSeg is a work in progress and, as such, may contain suboptimal code and
+ potential innacuracy in technical explanations resulting of reliance on
+ imprecise or misleading references. If you ever detect one such problem,
+ it would be great if you could drop the author a note.
+
+ If it is not much trouble, please open an issue at the repository and
+ apply it the lable 'matter'. Then, explain what should be improved.
+
+ Well, if you are in the mood of submitting a PR/MR, that would be great!
+
 
  Project standards
  ------------------------------
@@ -188,60 +189,131 @@ Contributing to SYSeg
 
  - Semantic versioning 2.0.0 [3]
 
- SUPPORT BRANCH NAMING (for PR/MR requests)
+ CONTRIBUTION PURPOSE
+ ------------------------------
 
- When creating a support branch to address an issue, name the branch
+ When applicable, use the following convention for commit messages and branch
+ names:
+
+ PERMANENT BRANCHES
+
+ The repository contains the two GitFlow permanent branches:
  
+ - `main`   : the stable branch 
+ - `dev`    : the unstable branch (aka `develop`)
 
-  `<purpose>/<issue number>/<short-descriptive-mnemonic>`
+ SUPPORT BRANCH NAMES (for PR/MR)
 
+ When creating an ephemeral branch, use the following keywords to indicate the
+ branch type:
 
- where `purpose` is one of the following:
+ - `feat`  : extend of correct the project components (GitFlow `feature`)
+ - `hot`   : carry on maintenance on former releases  (GitFlow `hotfix`)
+ - `rel`   : prepare a new release (GitFlow `release`)
+ - `exp`   : experimental branch (for tests, discussion etc.)
+ - `wip`   : work-in-progress branch (unrelated to any issue)
 
- - `fix`   :   fixes a bug or unmeant requirement 
- - `feat`  :   adds or modify a feature
- - `doc`   :   modify or extend documentation
- - `hot`   :   modifies the stable branch
- - `tidy`  :   performs repository maintenance
+ Ephemeral branch keywords do not differentiate the purpose of the change, be
+ it fixing a bug, editing documentation or modifying a feature.
 
- In addition, we also allow the following exceptional kind of
- branches, not linked to a particular issue:
+ If the branch addresses a particular issue, use the scheme
 
- - `wip`   :   temporary, works-in-progress branch
- - `duty`  :   duty handled outside the regular protocols
- - `minor` :   very small ad hoc changes for cosmetic purposes
+ ```
+    <type>/<issue-number>/<short-descriptive-note>
+ ```
 
- In this case, the branch should be named
+ Use lowercase alphanumeric characters, underscores, and hyphens in place of
+ spaces. No punctuation.
 
-   `<purpose>/short-descriptive-mnemonic`
+ It's usually preferrable that the PR/MR be linked to an existing issue.
+ Sometimes, however, we admit that ad hoc changes may be pragmatically
+ justifiable. In this case, if the PR/MR is not linked to an issue,
+ the simplified form
+ 
+  `<purpose>/<short-descriptive-mnemonic>`
+
+ is acceptable.
 
  COMMIT MESSAGES
 
- We suggest a lax version of the ideas outlined in Conventional
- Commits [4], but using a more informal, fluid approach. 
+ When editing the commit message, use the following keywords, inspired on lax
+ version of  Conventional Commits [4], to describe the purpose of your
+ contribution:
+ 
+ - `fix`    :   fix a bug or an unmeant requirement 
+ - `feat`   :   add or modify a feature (functional)
+ - `perf`   :   improve performance (non-functional)
+ - `tidy`   :   refactor code for quality or compliance
+ - `doc`    :   modify or extend documentation
+ - `build`  :   make changes affecting the build system
+ - `weeny`  :   apply minor or cosmetic changes
+ - `repo`   :   neaten the repository
+ - `other`  :   something else
 
- A recommended format for messages is
 
- `<purpose> : Short description`
+ The suggested format for messages is
 
- where the purpose is one of the support branch types.
+ `<purpose> : short description`
+
+ where the 'purpose' is one of the contribution purposes listed above.
+
+ The short description should be in imperative form (fix, add, remove etc.)
+ rather than past (fixed, added) or present (fixes, adds) --- as if ordering
+ what the change should do.  
 
  Ideally, each commit should be of only one type. In practice, though,
- it's reasonable to group changes in a single commit for efficiency,
- specially when those are related. In those cases, it's ok to use
+ it's reasonable to group changes in a single commit if they are naturally
+ related (e.g. you modifying a function's argument type and edit the developer
+ documentation to reflect the change). In those cases, it's ok to use
 
  ```
-  <purpose 1> : Short description 1
-  <purpose 2> : Short description 2
+  <purpose 1> : short description 1
+  
+  <purpose 2> : short description 2
   ...
  ```
 
+ Purpose indication in commit messages is suggested, but not mandatory (if not
+ used, capitalize the first letter and punctuate the short description
+ properly). Leave a blank line between statements.
+ 
  If it helps to understand the context, do not refrain from adding a
  paragraph further explaining the commit.
 
+ PR/MR MERGING
+ 
+ In the regular workflow, contributions in the form PR/MR should be submitted
+ to the mainstream repository, then analyzed and merged into the destination
+ branch. Bypassing the regular protocols is exceptionally acceptable, at the
+ discretion of the project maintainers, to address urgent demands such as
+ critical repository maintenance or emergency bug fixes.
+
+
+Only in contingency scenarios, at the project maintainers' discretion,
+ the regular protocols can be bypassed to address 
+
+ In exceptional cases, at the project maintainer discretion, the
+ regular protocols can be bypassed as a contingency measure such as 
+
+ At the discretion of project maintainers, however, 
+ 
+
+ Types 'duty' and 'minor' are reserved for project maintainers (with repository
+ write permission), and are elegible, at the discretion of the maintainer, to
+ bypass the regular PR/MR protocol and be merged directly in to the development
+ branch --- other types can also be directly merged under exceptional
+ circumnstances. 
+ 
+
+ COMMIT MESSAGES
+
+
+
+ 
+
  OTHER CONVENTIONS
 
- We intend to adhere to Keep a ChangeLog [5] in a near future.
+ Compliance to Keep a ChangeLog [5] is under consideration.
 
 
  References

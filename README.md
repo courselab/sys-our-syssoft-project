@@ -87,11 +87,8 @@ Build and Install
  Contributing
  ------------------------------
  
- SYSeg is a work-in-progress developed and, as such, may contain
- suboptimal code and potential innacuracy in technical explanations as
- result of reliance on imprecise or misleading references. If you ever
- detect one such problem, it would be great if you could drop the
- author a note.
+ Should you like to contribute code, please, refer to the file
+ `CONTRIBUTING.md`.
 
  Bug reports and suggestions are always welcome.
 
@@ -100,9 +97,19 @@ Build and Install
  The file 'AUTHORS' lists all contributors and acknowledgments, with
  respective contact information.
 
- Should you like to contribute code, please, refer to the file
- `CONTRIBUTING.md`.
+ I have a matter
+ ------------------------------
+
+ SYSeg is a work in progress and, as such, may contain suboptimal code and
+ potential innacuracy in technical explanations resulting of reliance on
+ imprecise or misleading references. If you ever detect one such problem,
+ it would be great if you could drop the author a note.
  
+ If it is not much trouble, please open an issue at the repository and
+ apply it the lable 'matter'. There, explain what should be improved.
+
+ Well, if you are in the mood of submitting a PR/MR, that would be great!
+
  Licensing
  -----------------------------
  

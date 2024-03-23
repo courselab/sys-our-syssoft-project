@@ -42,7 +42,7 @@ include(docm4.m4)
        as input, and produces a flat-binary 'hw.bin', suitable to be loaded and
        executed using the x86 BIOS legacy boot.
 
-       Write 'hwasm.c' in C, using only the ISO-C standard library [1].
+       Write 'hwasm.c' in C, using only the ISO-C standard library [[1]].
 
        The assembler may be a specific-purpose implementation that works only
        with the given input.
@@ -153,7 +153,7 @@ include(docm4.m4)
  Reference
  ------------------------------
 
- [1] C Standard library, https://en.wikipedia.org/wiki/C_standard_library
+ [[1]] C Standard library, https://en.wikipedia.org/wiki/C_standard_library
 
 
  DOCM4_EXERCISE_DIRECTIONS
