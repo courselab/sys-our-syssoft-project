@@ -250,33 +250,8 @@ cat<<EOF > $FILEPATH/.tools/readme.md
    The script should create the file, add some comments and, possibly, some 
    boilerplate code based on the file type (i.e. the file-name extension).
 
-   BUG ALERT:  If your current directory is, say \`\$PROJ\/foo\`, it's possible
-               that the helper script fails if you invoke it from there:
-
-	       \`\`\`
-
-	       cd foo
-	       ../.tools/syseg-newfile bar   (this mail fail)
-
-	       \`\`\`
-
-	       This is a known issue and is expected to be fixed.
-
-	       As a workaround, invoke the helper tools (tools/syseg-*) from
-	       the root of your project tree:
-
-	       \`\`\`
-
-	       cd foo
-	       cd ..
-	       ./tools/syseg-newfile foo/bar   (use this, instead)
-
-	       \`\`\`
-
-
    Remember, you must have SYSeg installed (\`make install\`).
 	       
-
  * SYSeg is free software and you may reuse its source code.
 
    Do not manually copy files from SYSeg source tree into your project's 
@@ -384,8 +359,8 @@ cat<<EOF
 Project successfully configure at $FILEPATH.
 
 Upstream-Name:    $(basename $FILEPATH)
-Upstream-Contact: Monaco F. J. <monaco@usp.br>
-Source:           <Fill in project URL>
+Upstream-Contact: $AUTHOR <$EMAIL>
+Source:           $URL
 
 Check the information above and edit '$FILEPATH/.reuse/deb5' if necessary.
 
@@ -393,8 +368,8 @@ Before starting with the project, please read the contents of the file
 
   $FILEPATH/.tools/readme.md
 
-which, contains important instructions that you should follow in order to
-ensure that the directory can be handled by SYSeg automatic evaluation tools.
+which, contains important directions that you should follow in order to ensure
+that the directory can be handled by the SYSeg automatic evaluation tools.
 
 EOF
 
