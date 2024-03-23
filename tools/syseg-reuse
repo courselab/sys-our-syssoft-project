@@ -35,6 +35,15 @@ COPYRIGHT="Monaco F. J. <monaco@usp.br>"
 YEAR="2021"
 LICENSE="GPL-3.0-or-later"
 
+##
+## We have observed that reuse-tool fails to detect the project root directory
+## if the directory is not a Git repository (perhaps a bug?) As a workaround
+## we try to infer the root ourselvs and pass it to reuse-tool using the
+## command-line option '--root'
+
+ROOT=$(realpath $(dirname $0)/..)
+
+
 # Where the script is being called from will define the path to the actual
 # reuse tool: if syset-reuse is being called from
 # - the project source tree, call the script in the project source tree;
@@ -81,7 +90,7 @@ while getopts "hvLdx:y:c:l:a" opt; do
 	    exit 0
 	    ;;
 	L)
-	    reuse --suppress-deprecation lint
+	    reuse --suppress-deprecation --root=$ROOT lint
 	    exit 0
 	    ;;
 	d)
@@ -120,13 +129,12 @@ if test -z "$filenames"; then
     exit 1
 fi
 
-# Call the actual reuse tool.
-
-
-echo ">> Invoking reuse from $REUSE_PATH"
+##
+## Call the actual reuse tool.
+##
 
 function do_annotate(){
-    $REUSE_PATH/reuse annotate --copyright="$COPYRIGHT" --year="$YEAR" --license="$LICENSE" --template=syseg $1 $extra_options $f
+    $REUSE_PATH/reuse --root=$ROOT annotate --copyright="$COPYRIGHT" --year="$YEAR" --license="$LICENSE" --template=syseg $1 $extra_options $f > /dev/null
 }
 
 

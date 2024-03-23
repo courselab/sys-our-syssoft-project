@@ -46,12 +46,6 @@ while getopts "vhfs" opt; do
 	    exit 0
 	    ;;
 	f)
-	    echo -n "Are you sure you want to overwrite $FILENAME (y|N)? "
-	    read reply
-	    if ! test "${reply^^}" == "Y"; then
-		echo "Aborted."
-		exit 0
-	    fi
 	    overwrite=1;
 	    ;;
 	s)
@@ -153,8 +147,6 @@ EOF
 	touch $FILEPATH
          	
 esac
-
-echo ">> Invoking newfile from $ORIGIN"
 
 tmpfile=$(mktemp)
 $ORIGIN/syseg-reuse -c "$(git config user.name) <$(git config user.email)>" -y "$(date +%Y)" -x  "--template=$template" "$2" $FILEPATH 2> $tmpfile
