@@ -48,7 +48,7 @@ while getopts "vhu" opt; do
 done
 shift "$(($OPTIND -1))"
 
-FILEPATH="$1"
+FILEPATH="${1%*/}"
 
 if test -z "$FILEPATH"; then
     usage
@@ -76,21 +76,36 @@ fi
 ORIGIN=$(dirname "$0")
 REUSE_PATH=$HOME/.syseg/bin
 
+#
+# Try to detect author, email and year from Git config.
+# 
+
 AUTHOR="$(git config user.name)"
 EMAIL="$(git config user.email)"
 LICENSE="GPL-3.0-or-later"
 YEAR="$(date +%Y)"
 
-REPO=$(git config remote.origin.url |sed 's/:/\//'| sed 's/git@/https:\/\//' )
-if test -z "$REPO"; then
-    echo "This script needs to be invoked from a repository"
+echo "Author info inferred from Git configuration"
+
+
+current_dir=$(pwd)
+cd $FILEPATH && REPO=$(git config remote.origin.url)
+cd $current_dir
+
+
+if test "${REPO%@*}" == "git"; then
+    echo "Inferring url from remote (ssh)"
+    URL="https://"$(echo "${REPO#git@*}" | sed 's/:/\//')
+elif test "${REPO%://*}" == "https"; then
+    echo "Path seems a Git repository; inferring url from remote (https)"
+    URL=$REPO
+else
+    echo "Path does not seem a Git repository; cannot infer url automatically"
+    echo -n "Please, enter the projct URL manually, if any: "
+    read URL
+    test -z "$URL" && URL="<Fill in project URL>"
 fi
-
-REPO="<FILL-IN-THIS-FIELD>"
-
-function do_annotate(){
-    $REUSE_PATH/reuse annotate --copyright="$AUTHOR" --year="$YEAR" --license="$LICENSE" --template=syseg $2 $1 > /dev/null
-}
+     
 
 ##
 ## Add AUTHOR file
@@ -98,6 +113,7 @@ function do_annotate(){
 
 if ! test -f $FILEPATH/AUTHOR; then
     echo "Creating $FILEPATH/AUTHOR"
+    
     cat<<EOF > $FILEPATH/AUTHOR
 
  AUTHORS
@@ -116,7 +132,10 @@ EOF
     sed -i "s/<AUTHOR>/$AUTHOR/" $FILEPATH/AUTHOR
     sed -i "s/<EMAIL>/<$EMAIL>/" $FILEPATH/AUTHOR
 
-    do_annotate $FILEPATH/AUTHOR --style=python
+
+    $REUSE_PATH/reuse annotate --copyright="$AUTHOR" --year="$YEAR" --license="CC-BY-ND-4.0" --template=syseg-newfile --style=python $FILEPATH/AUTHOR #> /dev/null
+
+    
 else
     echo "Skipping $FILEPATH/AUTHOR"
 fi
@@ -129,28 +148,20 @@ if ! test -f "$FILEPATH/README.md"; then
     echo "Creating $FILEPATH/README.md"
     cat<<EOF > $FILEPATH/README.md
 
- This project is a programming exercise based on SYSeg learning resources.
- For the source code, copyright and license information, please refer to
- SYSeg public official repository at https://gitlab.com/monaco/syseg.
-
- This program is free software and can be distributed under the terms of the 
- GNU General Public License version 3 of the license or, at your discretion, 
- any later version.
-
- Third-party source-code files distributed along with this piece of software
- are made available under their respective licenses, as annotated in each 
- individual file.
-
- See the terms of each license under the directory LICENSES. 
-
+ This is free software distributed under the terms of the GNU General Public 
+ License version 3 of the license or, at your discretion, any later version. 
+ See section 'Licensing' bellow for further information._
 
  About
  ==============================
 
- This project aims to solve a few implementation challenges features in SYSeg.
+ This project aims to solve implementation challenges included in the in 
+ the SYSeg project (a sysetm-software larning resource). Each individual 
+ programming exercise is developed within its own subdirectory, which 
+ contains the respective problem specification and the resolution attempt.
 
- Each individual programming exercise is developed within its own subdirectory
- containing the respective problem specification and the solution attempt.
+ Overview
+ ------------------------------
 
  <!-- Delete this comment:
 
@@ -160,11 +171,28 @@ if ! test -f "$FILEPATH/README.md"; then
 
  -->
 
+ Licensing
+ -----------------------------
+ 
+ This project is free software and can be distributed under the terms of GNU 
+ General Public License version 3 of the license or, at your discretion, any
+ later version. 
+
+ Third-party source files distributed along with SYSeg are made covered by 
+ their respective licenses, as annotated in each individual file.
+
+ See the terms of each license under the directory LICENSES. 
 
 EOF
 
-    do_annotate $FILEPATH/README.md
+    sed -i "s/<AUTHOR>/$AUTHOR/" $FILEPATH/README.md
+    sed -i "s/<EMAIL>/<$EMAIL>/" $FILEPATH/README.md
+    
+    $REUSE_PATH/reuse annotate --copyright="$AUTHOR" --year="$YEAR" --license="$LICENSE" --template=syseg-export --style=python $FILEPATH/README.md #> /dev/null
 
+    sed -i "s/<CONTRIBUTOR>/$AUTHOR <$EMAIL>/" $FILEPATH/README.md
+    
+    
 else
     echo "Skipping $FILEPATH/README.md"
 fi
@@ -305,6 +333,7 @@ cat<<EOF > $FILEPATH/.tools/readme.md
 
 EOF
 
+
 $ORIGIN/syseg-reuse $FILEPATH/.tools/readme.md > /dev/null
 
 ##
@@ -330,16 +359,14 @@ echo "Creating $FILEPATH/.reuse"
 
 test ! -d $FILEPATH/.reuse && cp -r $SRC/.reuse $FILEPATH
 
-cd $FILEPATH && REPO=$(git config remote.origin.url | sed 's/:/\//' | sed 's/git@/https:\/\//'  )
+# cd $FILEPATH && REPO=$(git config remote.origin.url | sed 's/:/\//' | sed 's/git@/https:\/\//'  )
 
-echo "Repo is $REPO"
-exit 1
 
 cat<<EOF > $FILEPATH/.reuse/dep5
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: $(basename $FILEPATH)
 Upstream-Contact: $AUTHOR <$EMAIL>
-Source: $REPO
+Source: $URL
 
 EOF
 
@@ -351,25 +378,34 @@ EOF
 echo "Updating license information"
 cd $FILEPATH && .tools/reuse download --all
 
-# echo -n "Checking REUSE compliance: "
-# tmpfile=$(mktemp)
-# cd $FILEPATH/ && .tools/reuse lint > $tmpfile
-# if test $? -ne 0; then
-#     cat $tmpfile
-#     exit 1
-# else
-#     echo "ok"
-# fi
-# rm -f $tmpfile
+
+cat<<EOF
+
+Project successfully configure at $FILEPATH.
+
+Upstream-Name:    $(basename $FILEPATH)
+Upstream-Contact: Monaco F. J. <monaco@usp.br>
+Source:           <Fill in project URL>
+
+Check the information above and edit '$FILEPATH/.reuse/deb5' if necessary.
+
+Before starting with the project, please read the contents of the file
+
+  $FILEPATH/.tools/readme.md
+
+which, contains important instructions that you should follow in order to
+ensure that the directory can be handled by SYSeg automatic evaluation tools.
+
+EOF
 
 
+# Check REUSE compliance
 
- # Quick note:
-
- # Before you start developing the exercise, please, read the contents of the 
- # file \`.tools/readme.md\` found in this directory. It contains important
- # instructions that you should follow carefully in order to make the best use
- # of SYSeg code examples and programming practice material.
-
- # **Read the instructions thoroughly.**: that will assuredly save you time. 
-
+cd $FILEPATH && $HOME/.syseg/bin/reuse lint > /dev/null
+if test $? -ne 0; then
+    echo
+    echo "WARNING: Failed to pass REUSE compliance check."
+    echo "         Run 'tools/syseg-reuse' -L from within $FILEPATH to identify"
+    echo "         the problem(s), and perform the applicable changes."
+    exit 1
+fi
