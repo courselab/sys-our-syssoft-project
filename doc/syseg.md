@@ -7,9 +7,9 @@
 -->
 
  SYSeg Manual
-==============================
+ ==============================
 
-TL;DR
+ TL;DR
 
 - As part of an undergraduate scientific program at the university, the author
   did some research work at the institute of physics. There was this huge and
@@ -22,48 +22,66 @@ TL;DR
  Introduction
  ------------------------------
 
- SYSeg (System Software, e.g.) is a collection of source-code examples and 
- programming exercises intended to illustrate general concepts and techniques 
- related to system software design and implementation. 
+ SYSeg (System Software, _exempli gratia__) is a collection of source-code
+ examples and programming exercises intended to illustrate general concepts
+ and techniques related to system-software design and implementation. 
 
- The package has been compiled from class notes in undergraduate courses in
- Computer Science and Engineering, and is meant to  be useful for students
- and instructors exploring low-level programming.
+ The material has been compiled from class notes throughout teaching sessions
+ in undergraduate and graduate courses in Computer Sciences and Engineering.
+ It is meant as a companion learning resource for both students and instructors
+ interested in low-level programming.
 
- SYSeg is distributed under the license GNU GPL vr.3 or later version.
+ SYSeg is distributed under the GNU General Public License version 3 or later.
 
- See file `AUTHORS` for contributors and contact information.
+ See file `AUTHORS` for contact information and the list of contributors.
 
+ Quick start
+ ------------------------------
+
+ You are strongly encouraged to thoroughly read the entire content of this file.
+
+ Anyway, if you need a short summary:
+
+ - Set up SYSeg before start using it: see section 'Setup instructions' below.
+
+ - To try the examples, refer to the file `README` in each subdirectory.
+ 
+ - To try the exercises, do read the section 'Proposed exercises' below.
+ 
+ - To contribute, refer to `CONTRIBUTING.md` in the root of the source tree.
+
+ In case you are exploring SYSeg for teaching or as a self-learning tool, the
+ author would be glad to know. If you could be so kind as sending an e-mail,
+ that would be much appreciated.
+ 
  Essential Information
  ------------------------------
 
  Each subdirectory in the source tree has a file `README` which contains
  important instructions on how use the directory's contents. 
 
- Please, as the the name suggests, do read the information --- that shall 
- assuredly save you precious time. 
-
  If you find a file named `README.m4`, this is not the file you're looking
  for; it's a source file that is used by SYSeg be create the actual `README`.
  If you find the source `README.m4` file but not the corresponding `README`
- file in the same directory, changes are that you have missed the package
+ file in the same directory, chances are that you have missed the package
  configuration procedure described bellow. If so, please go through the
  step-by-step directions and proceed as explained below.
 
  Requirements
  ------------------------------
  
- SYSeg was designed to be executed on the GNU/Linux operating systems, for
+ SYSeg was designed to be executed on the GNU/Linux operating systems for
  the x86 hardware platform (aka the standard PC computer).
 
  WINDOWS AND MAC USERS
  
  There have been reports of users being able to try SYSeg on Linux running in 
  a virtual machine over Microsoft Windows, as as well on WSL (Windows Subsystem
- for Linux). Such configurations have not been fully tested, though. 
+ for Linux). 
 
- The examples should work on MacOS, although such possibility has not being
- fully and systematically tested either.
+ The examples should work on MacOS, according to a few accounts.
+
+ None of these configurations have been systematically tested, though.
 
  If you decide to try a setup like those, feedback will be much appreciated.
 
@@ -120,16 +138,8 @@ TL;DR
   $ ./bootsrap.sh
  ```
 
- This will create the build configuration script `configure`.
-
- Perhaps you are already familiar with the GNU build system but, if you are not,
- no worries. The `configure` script is meant to check if your system meet all
- the requirements for building SYSeg, as a result, `configure` will create
- a customized build procedure that takes into account your compiler version,
- system libraries etc.
-
- The script `bootstrap.sh` requires that you have the GNU build system, 
- aka Autotools, installed in your computer. In an apt-based Linux distribution,
+ The script `bootstrap.sh` requires that you have the GNU build system, aka 
+ Autotools, installed in your computer. In an apt-based Linux distribution,
  for instance, you may install Autotools with
 
 ```
@@ -137,12 +147,20 @@ TL;DR
 ```
 
  On the other hand, if you have obtained the software in the form a
- __pre-initialized distribution bundle__, usually as a tarball, you should
+ pre-initialized distribution bundle, usually as a tarball, you should
  already have the  script `configure` pre-built and thus you will not need
  Autotools (you may then safely skip the Autotools installation step above).
 
- Either way, locate the file in the root of SYSeg source directory tree
- and execute it
+ Either way, the bootstrap script will create the configuration script
+ named `configure`.
+
+ Perhaps you are already familiar with the GNU build system but, if not, no
+ worries. The `configure` script is meant to check if your system meets all
+ the requirements for building SYSeg. As a result, `configure` will create
+ a customized build script that takes into account your compiler version,
+ system libraries etc.
+ 
+ Locate the script in the root of SYSeg source directory tree and execute it:
 
 ```
  $ ./configure
@@ -153,28 +171,13 @@ TL;DR
  as needed and rerun `configure`. The file `syseg.log` contains a summary
  of the last execution of the configuration script.
 
- Finally, build the software with
+ Next, build the software with
 
 ```
  $ make
 ```
 
- **Note** that, as mentioned, this procedure is intended to build the auxiliary
- tools needed by SYSeg. The examples and programming exercises themselves will
- not be built as result of the main configuration script being executed. The
- process of building the example code in each subdirectory is part of the skills
- that each example and programming exercise is meant to exercise.
-
- To build each example or programming exercise, one needs to access the
- subdirectory containing the respective source code and follow the instructions
- indicated in the corresponding `README` file (found in that respective
- subdirectory.)
-
- The file `INSTALL` (that should exist after you have bootstrapped the project)
- contains detailed instruction on how to customize SYSeg build and installation.
-
- If you intend to try the proposed programming exercises according to the given 
- directions, you will need to install SYSeg tools locally. To that end, execute
+ Finally, install SYSeg in your computer:
 
 ```
  $make install
@@ -185,6 +188,23 @@ TL;DR
  variable, as the tools that need to access the resources in it will know
  where to find them. Do not build or install SYSeg as the `root` user, nor use
  `sudo` to perform those tasks.
+
+ **Note** that, as mentioned, this procedure is intended to build the auxiliary
+ tools needed by SYSeg. The examples and programming exercises themselves will
+ not be built as result of the main build script being executed. The process of
+ building the example code in each subdirectory is part of the skills that each
+ example and implementation challenge is meant to illustrate. You will build
+ each example manually, as part of the exercise itself.
+
+ To build each example or programming exercise, one needs to access the
+ subdirectory containing the respective source code and follow the instructions
+ indicated in the corresponding `README` file (found in that respective
+ subdirectory after you have built SYSeg as described.)
+
+ The file `INSTALL` (that should exist after you have bootstrapped the project)
+ contains detailed instruction on how to customize SYSeg build and installation.
+ You'll only need to refer to this file if you have some special need to modify
+ the build and install process (usually, that's not the case).
 
  SYSeg Contents
  -------------------------------
@@ -247,8 +267,8 @@ TL;DR
  scripts to prepare bootstrap code and directions to deliver the activities
  through a VCS repository.
 
- If you reuse SYSeg code either in your classes or implementation project,
- you are kindly invited to drop the author a message. It's always nice to
+ If you reuse SYSeg code either in your classes or implementation project, you
+ are kindly invited to drop the author a message. It's always interesting to
  know who else is exploring the material.
 
  USING BOOTSTRAP CODE
@@ -287,22 +307,24 @@ TL;DR
 
    `make export` 
 
- The Makefile rule should create a tarball within the current
- directory, containing all the files relevant for that exercise. You
- should then copy/move the the tarball into your project directory and
- uncompress it there. Enter de newly created subdirectory of your
- project and develop the immplementation challenge.
+ The command should create a tarball within the current directory containing
+ all the files relevant for that exercise. You should then copy/move the tarball
+ into your project directory and uncompress it there. Enter the newly created
+ subdirectory of your project and develop the implementation challenge.
 
- When you are finished with the exercise, deliver your working using the method
- described in the aforementioned README file. As a suggestion, SYSeg's exercises
- will probably instruct you to commit your changes into a VCS (e.g. Git)
- repository and tag it with a delivery identifier (if not specified in the
- exercise documentation, use 'done' for the first delivery. If you
- need to submit a revised version, use the 'rev1',  'rev2' and so on).
+ For convenience, in case of usage in a guided instruction program, the
+ directions in the file `README` copied into your new project directory will
+ suggest you to deliver your work by committing your changes into a Git
+ repository, and tagging int with a delivery identifier. If not otherwise
+ specified by the instructor, use the tag name 'done' for the first delivery.
+ If you need to submit a revised version, use the 'rev1',  'rev2' and so on).
 
- To tag your project:
+ To deliver and tag your project:
 
  ```
+   git add <relevant-files>
+   git commit
+   git push 
    git tag done
    git push origin done
  ```

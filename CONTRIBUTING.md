@@ -105,13 +105,15 @@ Contributing to SYSeg
  
  * Symbol names, comments, file names etc. in English.
 
- * For C code, we stick with snake case, with symbols (variables and function
-   names) in lowercase, and macros in uppercase. We use exclusively C multi-line
-   comments. Filenames in snake lowercase, with version suffix according to
-   semantic versioning schema.
+ * For C code, we stick with the tradition: snake case, with symbols (variables
+   and function names) in lowercase, and macros in uppercase. We use exclusively
+   C multi-line comments. Filenames in lowercase.
 
- * Examples should use only the native runtime C library; no third-party
-   libraries (exceptions may be discussed, but have not being needed as yet).
+ * Version suffix according to semantic versioning [3] schema.
+
+ * Examples in C should use only the native runtime POSI-C library; no
+   third-party libraries (exceptions may be discussed, but have not being
+   needed as yet).
 
  * Blocks open in the next line for both functions and flow control statements
    (yes, I know, I know...)
@@ -136,11 +138,11 @@ Contributing to SYSeg
 
    -`ld`   linker script.
 
- Suffixes:
+ Development-stage suffixes:
 
    - `-alpha`       wrong or incomplete implementation to exemplify problems
    - `-beta`        working example, but suboptimal or inelegant implementation
-   - `(no suffix)`  working, intended implementation
+   - `(no suffix)`  working (hopefully), intended implementation
 
  * Comments are text. Use caption and punctuation accordingly.
 
@@ -148,9 +150,9 @@ Contributing to SYSeg
  ------------------------------
 
  If you have substantially modified an existing source or documentation
- file --- say  it's considerably more than a simple typo correction or
+ file --- say it's considerably more than a simple typo correction or
  small bug fix --- you are entitled to have your name added to the copyright
- notice and to the `AUTHORS` file, should you like so.
+ notice [1] and to the `AUTHORS` file, should you desire.
 
  By submitting your contribution you agree that it will be available under the
  same license as SYSeg (GNU GPL vr. 3 or later).
@@ -158,24 +160,23 @@ Contributing to SYSeg
  Code of conduct
  ------------------------------
 
- Just be considerate and inclusive face diversity.
+ Be considerate and inclusive face diversity.
 
- ..it happens
+ I have a matter.
  ------------------------------
 
- SYSeg contains source-code examples and implementation challenges collected
- by the author from class notes and programming exercises throughout the teaching
- practice in undergraduate courses in Computer Sciences and Engineering. As such
- the material is a work-in-progress endeavor and may contain (or, certainly
- contains) incomplete, suboptimal, or even imperfect code. Let's hope not, but 
- potential inaccuracy in technical explanations are not guaranteed not to
- happen as result of reliance on misleading references or imprecise
- documentation.
+ ..it happens.
 
- If you ever detect one such problem, it would be great if you could drop the
- author a note. Your input will be very appreciated, as it will help to improve
- the material. Special thanks shall be gratefully engraved in the source comments
- and documentation.
+ SYSeg is a work in progress and, as such, may contain suboptimal code and
+ potential innacuracy in technical explanations resulting of reliance on
+ imprecise or misleading references. If you ever detect one such problem,
+ it would be great if you could drop the author a note.
+
+ If it is not much trouble, please open an issue at the repository and
+ apply it the lable 'matter'. Then, explain what should be improved.
+
+ Well, if you are in the mood of submitting a PR/MR, that would be great!
+
 
  Project standards
  ------------------------------
@@ -188,43 +189,54 @@ Contributing to SYSeg
 
  - Semantic versioning 2.0.0 [3]
 
- SUPPORT BRANCH NAMING (for PR/MR requests)
+ CONTRIBUTION PURPOSE
+ ------------------------------
 
- When creating a support branch to address an issue, name the branch
- 
-
-  `<purpose>/<issue number>/<short-descriptive-mnemonic>`
-
-
- where `purpose` is one of the following:
+ When applicable, use one of the following types to describe the purpose
+ of your contribution:
 
  - `fix`   :   fixes a bug or unmeant requirement 
  - `feat`  :   adds or modify a feature
  - `doc`   :   modify or extend documentation
  - `hot`   :   modifies the stable branch
  - `tidy`  :   performs repository maintenance
-
- In addition, we also allow the following exceptional kind of
- branches, not linked to a particular issue:
-
  - `wip`   :   temporary, works-in-progress branch
- - `duty`  :   duty handled outside the regular protocols
  - `minor` :   very small ad hoc changes for cosmetic purposes
+ - `duty`  :   ad hoc change handled outside the regular protocols
 
- In this case, the branch should be named
 
-   `<purpose>/short-descriptive-mnemonic`
+ SUPPORT BRANCH NAMING (for PR/MR requests)
+
+ When creating a support branch to address an issue, name the branch
+ 
+  `<purpose>/<issue number>/<short-descriptive-mnemonic>`
+
+ where `purpose` (in lowercase) is one of the types described above.
+ 
+ It's usually preferrable that the PR/MR be linked to an existing issue.
+ Sometimes, however, we admit that ad hoc changes may be justifiable.
+ In this case, if the PR/MR is not linked to an issue, use the simplified
+
+  `<purpose>/<short-descriptive-mnemonic>`
+
+ is acceptable. The simplified form is more apropriate for the 'duty' and
+ 'minor' type changes.
 
  COMMIT MESSAGES
 
  We suggest a lax version of the ideas outlined in Conventional
  Commits [4], but using a more informal, fluid approach. 
 
- A recommended format for messages is
+ The suggested format for messages is
 
- `<purpose> : Short description`
+ `<Purpose> : Short description`
 
- where the purpose is one of the support branch types.
+ where the 'purpose' (with first letter in capital) is one of the contribution
+ purposes listed above.
+
+ The short description should be in imperative form (fix, add, remove etc.)
+ rather than past (fixed, added) or present (fixes, adds) --- as if ordering
+ what the change should do.  
 
  Ideally, each commit should be of only one type. In practice, though,
  it's reasonable to group changes in a single commit for efficiency,
@@ -236,12 +248,15 @@ Contributing to SYSeg
   ...
  ```
 
+ Purpose indication in commit messages is suggested, but not mandatory.
+
  If it helps to understand the context, do not refrain from adding a
  paragraph further explaining the commit.
 
+
  OTHER CONVENTIONS
 
- We intend to adhere to Keep a ChangeLog [5] in a near future.
+ Compliance to Keep a ChangeLog [5] is under consideration.
 
 
  References
