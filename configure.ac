@@ -234,8 +234,9 @@ AS_IF([test -f syseg.log],
 [
 echo ""
 echo "Configuration successfull."
-echo "Now, run 'make' (required) and 'make install' (recommended)."
+echo "Now, run 'make', and then 'make install'."
 echo "See doc/syseg.md for detailed instructions."
+echo ""
 ])
 
 dnl Save some data about the project for later user by some scripts.
