@@ -192,7 +192,7 @@ Contributing to SYSeg
  CONTRIBUTION PURPOSE
  ------------------------------
 
- When applicable, use one of the following types to describe the purpose
+ When applicable, use one of the following keywords to describe the purpose
  of your contribution:
 
  - `fix`   :   fixes a bug or unmeant requirement 
@@ -200,7 +200,7 @@ Contributing to SYSeg
  - `doc`   :   modify or extend documentation
  - `hot`   :   modifies the stable branch
  - `tidy`  :   performs repository maintenance
- - `wip`   :   temporary, works-in-progress branch
+ - `wip`   :   temporary, work-in-progress branch
  - `minor` :   very small ad hoc changes for cosmetic purposes
  - `duty`  :   ad hoc change handled outside the regular protocols
 
@@ -214,13 +214,20 @@ Contributing to SYSeg
  where `purpose` (in lowercase) is one of the types described above.
  
  It's usually preferrable that the PR/MR be linked to an existing issue.
- Sometimes, however, we admit that ad hoc changes may be justifiable.
- In this case, if the PR/MR is not linked to an issue, use the simplified
-
+ Sometimes, however, we admit that ad hoc changes may be pragmatically
+ justifiable. In this case, if the PR/MR is not linked to an issue,
+ the simplified form
+ 
   `<purpose>/<short-descriptive-mnemonic>`
 
- is acceptable. The simplified form is more apropriate for the 'duty' and
- 'minor' type changes.
+ is acceptable (this is most appropriate for 'duty' and 'minor' change types).
+
+ Types 'duty' and 'minor' are reserved for project maintainers (with repository
+ write permission), and are elegible, at the discretion of the maintainer, to
+ bypass the regular PR/MR protocol and be merged directly in to the development
+ branch --- other types can also be directly merged under exceptional
+ circumnstances. 
+ 
 
  COMMIT MESSAGES
 
