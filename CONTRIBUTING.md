@@ -207,14 +207,13 @@ Contributing to SYSeg
  When creating an ephemeral branch, use the following keywords to indicate the
  branch type:
 
- - `feat`  : extend of correct the project components (GitFlow `feature`)
+ - `feat`  : extend of modify feature (GitFlow `feature`)
+ - `fix`   : fix a bug (GitFlow `feature`)
+ - `doc`   : modify documentation (GitFlow `feature`)
  - `hot`   : carry on maintenance on former releases  (GitFlow `hotfix`)
  - `rel`   : prepare a new release (GitFlow `release`)
  - `exp`   : experimental branch (for tests, discussion etc.)
  - `wip`   : work-in-progress branch (unrelated to any issue)
-
- Ephemeral branch keywords do not differentiate the purpose of the change, be
- it fixing a bug, editing documentation or modifying a feature.
 
  If the branch addresses a particular issue, use the scheme
 
@@ -225,6 +224,16 @@ Contributing to SYSeg
  Use lowercase alphanumeric characters, underscores, and hyphens in place of
  spaces. No punctuation.
 
+  Example:
+
+ ```
+  feat/42/modify-option-help
+
+  fix/66/crash-on-negative-input
+
+ ```
+
+
  It's usually preferrable that the PR/MR be linked to an existing issue.
  Sometimes, however, we admit that ad hoc changes may be pragmatically
  justifiable. In this case, if the PR/MR is not linked to an issue,
@@ -232,8 +241,8 @@ Contributing to SYSeg
  
   `<purpose>/<short-descriptive-mnemonic>`
 
+ is acceptable (this is most appropriate for 'wip' and 'exp' types).
 
- is acceptable.
 
  COMMIT MESSAGES
 
@@ -241,27 +250,41 @@ Contributing to SYSeg
  version of  Conventional Commits [4], to describe the purpose of your
  contribution:
  
- - `fix`    :   fix a bug or an unmeant requirement 
- - `feat`   :   add or modify a feature (functional)
- - `perf`   :   improve performance (non-functional)
- - `tidy`   :   refactor code for quality or compliance
- - `doc`    :   modify or extend documentation
- - `build`  :   make changes affecting the build system
- - `weeny`  :   apply minor or cosmetic changes
- - `repo`   :   neaten the repository
- - `other`  :   something else
+ - `Fix`    :   fix a bug or an unmeant requirement 
+ - `Feat`   :   add or modify a feature (functional)
+ - `Perf`   :   improve performance (non-functional)
+ - `Tidy`   :   refactor code for quality or compliance
+ - `Doc`    :   modify or extend documentation
+ - `Build`  :   make changes affecting the build system
+ - `Minor`  :   apply minor or cosmetic changes
+ - `Repo`   :   neaten the repository
+ - `Other`  :   something else
 
 
  The suggested format for messages is
 
- `<purpose> : short description`
+ `<Purpose> : short description`
 
- where the 'purpose' is one of the contribution purposes listed above.
+ where 'Purpose' is one of the contribution purposes listed above.
 
  The short description should be in imperative form (fix, add, remove etc.)
  rather than past (fixed, added) or present (fixes, adds) --- as if ordering
- what the change should do.  
+ what the change should do (mind the capitalization).
+ 
+Example:
 
+ ```
+   Fix: correct wrong file name
+
+   Fix: fix missing semicolon
+
+   Doc: update user manual
+
+   Repo: removed object files
+
+```
+
+ 
  Ideally, each commit should be of only one type. In practice, though,
  it's reasonable to group changes in a single commit if they are naturally
  related (e.g. you modifying a function's argument type and edit the developer
