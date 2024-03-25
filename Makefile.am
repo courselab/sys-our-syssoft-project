@@ -22,11 +22,9 @@ clean-local:
 	  fi;\
 	done
 
-EXTRA_DIST = $(other_dirs) .gitignore
+EXTRA_DIST = $(other_dirs) .gitignore .version .srcdir
 
 EXTRA_GARBAGE = *~
 
 DISTCLEANFILES = $(DESTDIR).srcdir $(DESTDIR).version
 
-# dist-hook:
-# 	touch $(distdir)/INSTALL.license
