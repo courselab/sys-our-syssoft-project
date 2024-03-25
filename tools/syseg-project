@@ -384,3 +384,7 @@ if test $? -ne 0; then
     echo "         the problem(s), and perform the applicable changes."
     exit 1
 fi
+
+# Copy .srcdir and .version files
+
+cp $SRC/.srcdir $SRC/.version $FILEPATH
