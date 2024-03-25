@@ -189,7 +189,7 @@ Contributing to SYSeg
 
  - Semantic versioning 2.0.0 [3]
 
- CONTRIBUTION PURPOSE
+ Contribution purpose
  ------------------------------
 
  When applicable, use the following convention for commit messages and branch
@@ -231,6 +231,7 @@ Contributing to SYSeg
  the simplified form
  
   `<purpose>/<short-descriptive-mnemonic>`
+
 
  is acceptable.
 
@@ -288,28 +289,6 @@ Contributing to SYSeg
  discretion of the project maintainers, to address urgent demands such as
  critical repository maintenance or emergency bug fixes.
 
-
-Only in contingency scenarios, at the project maintainers' discretion,
- the regular protocols can be bypassed to address 
-
- In exceptional cases, at the project maintainer discretion, the
- regular protocols can be bypassed as a contingency measure such as 
-
- At the discretion of project maintainers, however, 
- 
-
- Types 'duty' and 'minor' are reserved for project maintainers (with repository
- write permission), and are elegible, at the discretion of the maintainer, to
- bypass the regular PR/MR protocol and be merged directly in to the development
- branch --- other types can also be directly merged under exceptional
- circumnstances. 
- 
-
- COMMIT MESSAGES
-
-
-
- 
 
  OTHER CONVENTIONS
 
