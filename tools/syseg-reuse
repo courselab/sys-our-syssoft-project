@@ -194,6 +194,9 @@ for f in $filenames; do
 		    README|Makefile|TODO)
 			do_annotate "--style=python"
 			;;
+		    SOLVING)
+			do_annotate "--style=python --template=syseg-newfile"
+			;;
 		    *)
 			do_annotate 
 			;;

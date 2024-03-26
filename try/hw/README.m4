@@ -62,7 +62,7 @@ include(docm4.m4)
 
        Do the outputs match? (They don't necessarily have too).
 
-       Comment in the file 'README'.
+       Comment in the file 'SOLVING'.
 
     e) Disassemble 'hw.bin' and compare the result with 'hw.S'.
 
@@ -70,7 +70,7 @@ include(docm4.m4)
 
        Does the output (at least approximately) matches 'hw.S'? 
 
-       Comment in the file 'README'.
+       Comment in the file 'SOLVING'.
        
     f) Boot 'hw.bin' using the 'qemu' emulator.
 
@@ -78,7 +78,7 @@ include(docm4.m4)
 
        Does it work?
 
-       Comment in the file 'README'.
+       Comment in the file 'SOLVING'.
        
     g) Boot 'hw.bin' in a real piece of hardware.
 
@@ -100,7 +100,7 @@ include(docm4.m4)
 	     
         Doesn't it work? Bummer! Proceeed to item (h).
 
-	Comment in the file 'README'.
+	Comment in the file 'SOLVING'.
 
 
      h) What if does not work.
@@ -125,7 +125,7 @@ include(docm4.m4)
 	- Test it in the emulator to check everything is all right.
 	- Try to boot it in the real hardware.
 
-	Comment in the file 'README'.
+	Comment in the file 'SOLVING'.
 
       i) Test 'hw.S' implementation using the GNU build chain.
 
@@ -147,7 +147,7 @@ include(docm4.m4)
 	 (see 'eg/hw/eg-03.S' for an example)
                    
 
-	 Comment in the file 'README'.
+	 Comment in the file 'SOLVING'.
 
 	 
  Reference

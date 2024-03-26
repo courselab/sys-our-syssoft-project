@@ -29,13 +29,14 @@ ORIGIN=$(dirname "$0")
 
 template="syseg-newfile"
 
-# Default to syseg template if the script is invoked from SYSeg source tree.
+# Default to syseg template if the script is invoked from SYSeg source tree,
+# unless option -c is used.
 if test -f $ORIGIN/../.srcdir; then
     template="syseg"
 fi
 
 overwrite=0
-while getopts "vhfs" opt; do
+while getopts "vhfsc" opt; do
     case $opt in
 	h)
 	    help
@@ -50,8 +51,14 @@ while getopts "vhfs" opt; do
 	    ;;
 	s)
 	    # This option is intentionally undocummented.
+	    # -s forces syseg template.
 	    template="syseg"
 	    echo "New SYSeg source file"
+	    ;;
+	c)
+	    # This option is intentionally undocummented.
+	    # -c forces syseg-newfile template (overrides -s)
+	    template="syseg-newfile"
 	    ;;
     esac
 done

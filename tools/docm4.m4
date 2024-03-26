@@ -210,6 +210,8 @@ define([DOCM4_BINTOOLS_DOC],
 
    make foo/stick dev    	   	     make stick IMG=foo DEVICE=dev
 
+   make foo/l	  			     open foo in 'less' program
+
  ])
 
 define([DOCM4_BOOT_NOTE],
@@ -484,19 +486,12 @@ define([DOCM4_EXPORT],
 ## self-contained subsections of DOCM4_PROJECT meant to be delivered as
 ## programming exercise assignments or illustrative source code examples.
 ##		
-## In order to select which files should be included in the pack, list them
+## In order to select which files should be included in the bundle, list them
 ## in the appropriate variables
 ## 
-## EXPORT_FILES_C    = C files (source, headers, linker scripts)
-## EXPORT_FILES_MAKE = Makefiles
-## EXPORT_FILES_TEXT = Text files (e.g. README)
-## EXPORT_FILES_SH   = Shell scripts (standard /bin/sh)
+## EXPORT_FILES      (Copy and annotate these files)
+## EXPORT_NEW_FILES  (Create these new files in the export bundle)
 ##
-## Except by text files, all other files will have their heading comment
-## (the very first comment found in the file) replaced by a corresponding
-## standard comments containing boilerplate copyright notice and licensing
-## information, with blank fields to be filled in by the pack user.
-## Attribution to DOCM4_PROJECT is also included for convenience.
 
 TARNAME=$1
 
@@ -518,7 +513,9 @@ do_export:
 	done
 	touch $(TARNAME)/.dist
 	tar zcvf $(TARNAME).tar.gz $(TARNAME)
-
+	for i in $(EXPORT_NEW_FILES); do\
+	  TOOL_PATH/syseg-newfile -c $(TARNAME)/$$i;\
+	done
 
 clean-export:
 	rm -f $(TARNAME).tar.gz
@@ -535,6 +532,7 @@ define([DOCM4_REVIEW],[
 ##  NOTE: The contents of this directory are being reviewed for assessment
 ##        and potential revision of source code and documentation.
 ##
+##  -----------------------------------------------------------------------
 
 ])
 

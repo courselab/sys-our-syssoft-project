@@ -45,7 +45,7 @@ clean:
 # Create stand-alone distribution
 
 EXPORT_FILES = Makefile README
-
+EXPORT_NEW_FILES = SOLVING
 
 DOCM4_BINTOOLS
 DOCM4_EXPORT([hw],[0.1.1])
