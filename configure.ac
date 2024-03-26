@@ -22,7 +22,7 @@ LT_INIT
 dnl Set some variables containing copyright information
 
 AC_SUBST([COPYRIGHT_YEAR],["2021"])
-AC_SUBST([COPYRIGHT_NAME],["Monaco F. J. <monaco@usp.br>."])
+AC_SUBST([COPYRIGHT_NAME],["Monaco F. J."])
 AC_SUBST([COPYRIGHT_EMAIL],["monaco@usp.br"])
 
 

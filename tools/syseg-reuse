@@ -195,7 +195,7 @@ for f in $filenames; do
 			do_annotate "--style=python"
 			;;
 		    SOLVING)
-			do_annotate "--style=python --template=syseg-newfile"
+			do_annotate "--style=python"
 			;;
 		    *)
 			do_annotate 

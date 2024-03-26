@@ -511,11 +511,11 @@ do_export:
 	for i in $(EXPORT_FILES); do\
 	  TOOL_PATH/syseg-export $$i $(TARNAME);\
 	done
-	touch $(TARNAME)/.dist
-	tar zcvf $(TARNAME).tar.gz $(TARNAME)
 	for i in $(EXPORT_NEW_FILES); do\
 	  TOOL_PATH/syseg-newfile -c $(TARNAME)/$$i;\
 	done
+	touch $(TARNAME)/.dist
+	tar zcvf $(TARNAME).tar.gz $(TARNAME)
 
 clean-export:
 	rm -f $(TARNAME).tar.gz
