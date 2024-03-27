@@ -17,6 +17,12 @@ dnl       tree (yep, it's called README for a reason).
 
 include(docm4.m4)dnl
 
+all: #$(bin) $(ppi) $(arc) $(lib)
+	@echo "Specify a target"
+
+
+UPDATE_MAKEFILE 
+
 #
 # Main examples and auxiliary examples
 #
@@ -26,7 +32,6 @@ ppi = eg-05.i
 arc = eg-07.a
 lib = libeg-08.a
 
-all: $(bin) $(ppi) $(arc) $(lib)
 
 BARE= -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fcf-protection=none
 

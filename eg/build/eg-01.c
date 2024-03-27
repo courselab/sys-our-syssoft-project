@@ -10,6 +10,8 @@
 
 #define MAX 10
 
+const char *msg = "bar";
+
 void foo();
 
 int main()
