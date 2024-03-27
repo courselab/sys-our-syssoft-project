@@ -308,6 +308,10 @@ Makefile : $(shell if test -f Makefile.m4; then echo $(Makefile_deps); fi);
 
 
 endif
+
+updatem4:
+	make -C ..
+
 ])
 
 ##
@@ -402,6 +406,11 @@ define([DOCM4_EXPORT_DIRECTIONS],
  to your project, handle copyright information and other tasks.
 
  Finally, deliver your project as instructed.
+
+ Within the exercise directory you should find a file named  'SOLVING' or
+ 'NOTEBOOK´, which you should use as a  laboratory notebook for you to explain
+ how you solved the implementation challenge, including annotations about the
+ results, limitations and difficulties you may have found.
 
 ])
 
