@@ -6,25 +6,21 @@
  *    This file is part of SYSeg, available at https://gitlab.com/monaco/syseg.
  */
 
-/* Like eg-03-beta.c but with declared headers. */
+#include <stdio.h>
 
-int foo(int);
-int bar(int);
+int foo(int, int);
 
-int main ()
+int main()
 {
-   int a,b;
-   a = foo(10);
-   b = bar(20);
-   return a+b;
+  int b;
+  b = foo(1);
+
+  printf("%u\n", b);
+
+  return b;
 }
 
-int foo(int x)
+int foo(int a, int b)
 {
-   return x+1;
-}
-
-int bar(int x)
-{
-   return x+2;
+  return a+b;
 }

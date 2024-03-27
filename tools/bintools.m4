@@ -124,6 +124,12 @@ diss d diss* d*: $(IMG)
 %/a32* %/32a* %/32* %/a*: %
 	make --quiet $</diss* att 32 $(opts) $(symbol)
 
+%/less : %
+	less $(@D)
+
+%/cat : %
+	cat $(@D)
+
 ##
 ## Run on the emulator
 ##

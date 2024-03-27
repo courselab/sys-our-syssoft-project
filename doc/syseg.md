@@ -365,27 +365,32 @@
  If you ever find any trouble using SYSeg, consider the following tips.
 
 ### I can see a `README.m4` or a `Makefile.m4` file in a given directory,
-    but can't find the corresponding `README` or `Makefile` file.
+    but can't find the corresponding `README` or `Makefile`.
 
     This probably happens because you've missed the installation instructions.
    
-   To fix the issue:
+    To fix the issue:
    
-   ```
-   cd <path>/syseg
-   ./bootstrap.sh
-   ./configure
-   make
-   ```
-   
-### I edited a Makefile.m4 and need to update the corresponding Makefile
+    ```
+    cd <path>/syseg
+    ./bootstrap.sh
+    ./configure
+    make
+    make install
+    ```
+
+    Don't run the commands above as super user.
+
+
+### I edited a `Makefile.m4` and need to update the corresponding Makefile
  
    Within the directory containing the edited `Makefile.am`, invoke:
    
    ```
-   make -C ..
+   make updatem4
    ```
    
 ### I tried everything to no avail.
 
     You're welcome to drop a message to the author.
+

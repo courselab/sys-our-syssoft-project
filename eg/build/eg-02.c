@@ -6,22 +6,23 @@
  *    This file is part of SYSeg, available at https://gitlab.com/monaco/syseg.
  */
 
-/* A program made of a single compilation unity. */
+#include <stdio.h>
 
-int foo(int x)
+foo_t foo();
+
+int main()
 {
-   return x+1;
+  int b;
+  b = foo(512);
+
+  printf("%d\n", b);
+
+  return b;
 }
 
-int bar(int x)
+foo_t foo(int a)
 {
-   return x+2;
+  return a+1;
 }
 
-int main ()
-{
-   int a,b;
-   a = foo(10);
-   b = bar(20);
-   return a+b;
-}
+

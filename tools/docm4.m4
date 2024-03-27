@@ -286,13 +286,18 @@ define([DOCM4_CLOSING_WORDS],
 ##
 define([UPDATE_MAKEFILE],
 [
-# Update Makefile from Makefile.m4 if needed, and then invoke make again.
-# If the source is from a distribution bundle, the lack of Makefile.m4
-# inhibits the updating. 
+# This rule is not relevant for the implementation examples in this directory.
+# It is part of SYSeg mechanism to update Makefile from Makefile.m4 if the
+# latter has changed. If the source is from a distribution bundle, the lack
+# of an Makefile.m4 file inhibits the updating. 
 
 ifndef UPDATED
 
 Makefile_deps = Makefile.m4 DOCM4_DEPS
+
+dnl The rule currently updates every docm4 file under ..
+dnl Should we update only ./Makefile?
+dnl Should we update also README?
 
 Makefile : $(shell if test -f Makefile.m4; then echo $(Makefile_deps); fi);
 	@if ! test -f .dist; then\
@@ -301,7 +306,12 @@ Makefile : $(shell if test -f Makefile.m4; then echo $(Makefile_deps); fi);
 	  make -f Makefile UPDATED=1 $(MAKECMDGOAL);\
 	fi
 
+
 endif
+
+updatem4:
+	make -C ..
+
 ])
 
 ##
@@ -396,6 +406,11 @@ define([DOCM4_EXPORT_DIRECTIONS],
  to your project, handle copyright information and other tasks.
 
  Finally, deliver your project as instructed.
+
+ Within the exercise directory you should find a file named  'SOLVING' or
+ 'NOTEBOOK´, which you should use as a  laboratory notebook for you to explain
+ how you solved the implementation challenge, including annotations about the
+ results, limitations and difficulties you may have found.
 
 ])
 

@@ -6,21 +6,11 @@
  *    This file is part of SYSeg, available at https://gitlab.com/monaco/syseg.
  */
 
-/* Call foo and return. */
-
-#define MAX 10
-
-const char *msg = "bar";
-
-void foo();
+extern void bar1();
 
 int main()
 {
-  foo();
-  return MAX;
+  bar1();
+  
+  return 0;
 }
-
-void foo()
-{
-}
-

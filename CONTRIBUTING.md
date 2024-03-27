@@ -221,8 +221,8 @@ Contributing to SYSeg
     <type>/<issue-number>/<short-descriptive-note>
  ```
 
- Use lowercase alphanumeric characters, underscores, and hyphens in place of
- spaces. No punctuation.
+ Use lowercase alphanumeric ASCII characters, underscores, and hyphens in
+ place of spaces. No punctuation.
 
   Example:
 
@@ -232,7 +232,6 @@ Contributing to SYSeg
   fix/66/crash-on-negative-input
 
  ```
-
 
  It's usually preferrable that the PR/MR be linked to an existing issue.
  Sometimes, however, we admit that ad hoc changes may be pragmatically
@@ -269,7 +268,7 @@ Contributing to SYSeg
 
  The short description should be in imperative form (fix, add, remove etc.)
  rather than past (fixed, added) or present (fixes, adds) --- as if ordering
- what the change should do (mind the capitalization).
+ what the change should do (mind the capitalization). Do not punctuate.
  
 Example:
 
@@ -283,7 +282,6 @@ Example:
    Repo: removed object files
 
 ```
-
  
  Ideally, each commit should be of only one type. In practice, though,
  it's reasonable to group changes in a single commit if they are naturally
@@ -298,15 +296,16 @@ Example:
  ```
 
  Purpose indication in commit messages is suggested, but not mandatory (if not
- used, capitalize the first letter and punctuate the short description
- properly). Leave a blank line between statements.
+ used, capitalize the first letter. Leave a blank line between statements.
  
- If it helps to understand the context, do not refrain from adding a
- paragraph further explaining the commit.
+ If it helps to understand the context, do not refrain from adding a paragraph
+ further explaining the commit. This is normal text, so, capitalize and
+ punctuate accordingly.
+ 
 
  PR/MR MERGING
  
- In the regular workflow, contributions in the form PR/MR should be submitted
+ In the regular workflow, contributions in the form PR/MRs should be submitted
  to the mainstream repository, then analyzed and merged into the destination
  branch. Bypassing the regular protocols is exceptionally acceptable, at the
  discretion of the project maintainers, to address urgent demands such as
