@@ -27,7 +27,7 @@ UPDATE_MAKEFILE
 # Main examples and auxiliary examples
 #
 
-bin = eg-01 eg-02 eg-03-alpha eg-03 eg-04 eg-06 eg-06 
+bin = eg-01 eg-02-int eg-02-char eg-02-implicit eg-03-alpha eg-03 eg-04 eg-06 eg-06  
 ppi = eg-05.i
 arc = eg-07.a
 lib = libeg-08.a
@@ -49,9 +49,23 @@ eg-01.s : %.s : %.i
 eg-01.i : %.i : %.c
 	cpp -Wall -P $< -o $@
 
+# Implicit declaration
+
+
+eg-02-int eg-02-char eg-02-implicit eg-02-mismatch: eg-02-% : eg-02-%.i
+	gcc -m32 -Wall $< -o $@
+
+eg-02-int.i eg-02-char.i: eg-02-%.i : eg-02.c
+	cpp $< -Dfoo_t=$* -o $@
+
+eg-02-implicit.i eg-02-mismatch.i: %.i : %.c
+	cpp $< -o $@
+
+
+
 # Compilation unities
 
-eg-02 eg-03 : % : %.c
+eg-03 : % : %.c
 	gcc -Wall $< -o $@
 
 eg-03-alpha : % : %.c
