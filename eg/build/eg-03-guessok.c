@@ -8,12 +8,12 @@
 
 #include <stdio.h>
 
-int foo(int, int);
+int foo();
 
 int main()
 {
   int b;
-  b = foo(1);
+  b = foo(1, 2);
 
   printf("%u\n", b);
 

@@ -8,19 +8,15 @@
 
 #include <stdio.h>
 
-int foo(int, int);
+
+extern b;
 
 int main()
 {
-  int b;
-  b = foo(1);
 
-  printf("%u\n", b);
+  printf("%d\n", b);
 
   return b;
 }
 
-int foo(int a, int b)
-{
-  return a+b;
-}
+varb_t b = 512;

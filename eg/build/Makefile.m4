@@ -17,9 +17,8 @@ dnl       tree (yep, it's called README for a reason).
 
 include(docm4.m4)dnl
 
-all: #$(bin) $(ppi) $(arc) $(lib)
+all: 
 	@echo "Specify a target"
-
 
 UPDATE_MAKEFILE 
 
@@ -27,10 +26,8 @@ UPDATE_MAKEFILE
 # Main examples and auxiliary examples
 #
 
-bin = eg-01 eg-02-int eg-02-char eg-02-implicit eg-03-alpha eg-03 eg-04 eg-06 eg-06  
-ppi = eg-05.i
-arc = eg-07.a
-lib = libeg-08.a
+bin = eg-01 eg-02-int eg-02-char eg-02-implicit eg-02-var-int eg-02-var-char eg-03-guessok eg-03-guessbad eg-03 eg-04-beta eg-04 eg-06 eg-06 eg-08 eg-08_alt
+bin : $(bin)
 
 
 BARE= -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fcf-protection=none
@@ -62,16 +59,25 @@ eg-02-implicit.i eg-02-mismatch.i: %.i : %.c
 	cpp $< -o $@
 
 
+eg-02-var-int eg-02-var-char: eg-02-var-% : eg-02-var.c
+	- gcc -m32 -Dvarb_t="$*" $< -o $@
+
 
 # Compilation unities
-
-eg-03 : % : %.c
-	gcc -Wall $< -o $@
 
 eg-03-alpha : % : %.c
 	gcc -Wall $< -o $@
 	@echo "Note: it's ok, we were expecting this warning"
 	@echo
+
+# Try also wtih -Wstrict-prototypes
+eg-03-guessok eg-03-guessbad eg-03: % : %.c
+	- gcc -Wall -Wextra $(CFLAGS)  -m32 $< -o $@
+
+#
+
+eg-04-beta : % : %.c
+	gcc -Wall $< -o $@
 
 eg-04 : % : %.i
 	gcc -Wall $< -o $@
@@ -122,6 +128,19 @@ eg-07.a :
 
 
 
+
+libeg-08.a: eg-08_foo.o eg-08_bar.o
+	ar rcs $@ $^  
+
+eg-08_foo.o eg-08_bar.o eg-08.o: %.o : %.c
+	gcc -c $< -o $@
+
+eg-08 : eg-08.o libeg-08.a
+	gcc -L. eg-08.o -leg-08 -o $@
+
+
+eg-08_alt: eg-08.o eg-08_foo.o eg-08_bar.o
+	gcc $^ -o $@
 
 .PHONY: clean
 

@@ -8,19 +8,18 @@
 
 #include <stdio.h>
 
-int foo(int, int);
 
 int main()
 {
   int b;
-  b = foo(1);
+  b = foo(512);
 
-  printf("%u\n", b);
+  printf("%d\n", b);
 
   return b;
 }
 
-int foo(int a, int b)
+int foo(int a)
 {
-  return a+b;
+  return a+1;
 }

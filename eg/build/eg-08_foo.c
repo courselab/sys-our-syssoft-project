@@ -6,21 +6,5 @@
  *    This file is part of SYSeg, available at https://gitlab.com/monaco/syseg.
  */
 
-#include <stdio.h>
-
-int foo(int, int);
-
-int main()
-{
-  int b;
-  b = foo(1);
-
-  printf("%u\n", b);
-
-  return b;
-}
-
-int foo(int a, int b)
-{
-  return a+b;
-}
+void foo1(void){};
+void foo2(void){};
