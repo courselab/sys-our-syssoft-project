@@ -4,13 +4,18 @@
 #
 #    This file is part of SYSeg, available at https://gitlab.com/monaco/syseg.
 
-EXTRA_DIST =
+
+##
+## Configuration
+##
+
+# List of files that should be created from the source m4 files.
 
 docm4_files = README 
 
 include $(top_srcdir)/tools/docm4.am
 
-clean-local:
-	rm -f $(docm4_files)
+# clean-local:
+# 	rm -f $(docm4_files)
 
-dist-hook: clean-local
+# dist-hook: clean-local
