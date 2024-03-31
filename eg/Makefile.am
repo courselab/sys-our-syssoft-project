@@ -4,15 +4,24 @@
 #
 #    This file is part of SYSeg, available at https://gitlab.com/monaco/syseg.
 
-extra_subdirs = hw abi build make format run real bl tyos crt tyos32 posix
+##
+## Configuration
+##
 
-EXTRA_DIST = $(extra_subdirs)
+# Name the subdirs in this section.
 
-docm4_files = README abi/README abi/Makefile format/Makefile format/README run/Makefile run/README hw/README hw/Makefile real/README real/Makefile build/README build/Makefile make/README rop/README rop/Makefile bl/Makefile bl/README tyos/README tyos/Makefile crt/Makefile crt/README tyos32/Makefile tyos32/README posix/README posix/Makefile 
+extra_subdirs = hw abi build make format run real bl tyos crt tyos32 posix foo
+
+# List of files that should be created from the source m4 files.
+
+docm4_files = README abi/README abi/Makefile format/Makefile format/README run/Makefile run/README hw/README hw/Makefile real/README real/Makefile build/README build/Makefile make/README rop/README rop/Makefile bl/Makefile bl/README tyos/README tyos/Makefile crt/Makefile crt/README tyos32/Makefile tyos32/README posix/README posix/Makefile foo/Makefile foo/README
+
+##
+## No need to change this
+##
 
 # REUSE-IgnoreStart
 include $(top_srcdir)/tools/docm4.am
-include $(top_srcdir)/tools/clean-extra-subdirs.am
 # REUSE-IgnoreEnd 
 
-
+EXTRA_DIST += $(extra_subdirs)

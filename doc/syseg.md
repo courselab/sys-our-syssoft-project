@@ -109,6 +109,7 @@
  - GCC 	     	 9.3.0	        (the GNU compiler)
  - GNU binutils  2.34		(GNU assembler, linker, disassembler etc.)
  - GNU coreutils 8.30		(basic utilities, probably already installed)
+ - GNU make	 4.3		(build automation tool)
  - nasm		 2.14.02	(NASM assembler)
  - qemu		 4.2.1		(x86 emulator, specifically qemu-system-i386)
  - gcc-multilib  9.3.0		(to compile 16/32-bit code in a 64-bit platform)

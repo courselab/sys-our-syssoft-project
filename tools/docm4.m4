@@ -284,7 +284,11 @@ define([DOCM4_CLOSING_WORDS],
 ##
 ## Update Makefile from Makefile.m4
 ##
-define([UPDATE_MAKEFILE],
+
+# Marked for deprecation, use DOCM4_ prefix.
+define([UPDATE_MAKEFILE],[DOCM4_UPDATE_MAKEFILE])
+
+define([DOCM4_UPDATE_MAKEFILE],
 [
 # This rule is not relevant for the implementation examples in this directory.
 # It is part of SYSeg mechanism to update Makefile from Makefile.m4 if the
@@ -293,19 +297,16 @@ define([UPDATE_MAKEFILE],
 
 ifndef UPDATED
 
-Makefile_deps = Makefile.m4 DOCM4_DEPS
+Makefile_deps = DOCM4_DEPS
 
-dnl The rule currently updates every docm4 file under ..
-dnl Should we update only ./Makefile?
-dnl Should we update also README?
-
-Makefile : $(shell if test -f Makefile.m4; then echo $(Makefile_deps); fi);
-	@if ! test -f .dist; then\
-	  cd .. && make;\
-	  make -f Makefile clean;\
-	  make -f Makefile UPDATED=1 $(MAKECMDGOAL);\
+Makefile : Makefile.m4 $(Makefile_deps) 
+	@path=$$(pwd) ; dir=$${path##*/};\
+	if ! test -f .dist; then\
+	   make -C .. $$dir/Makefile;\
 	fi
-
+	@echo "Makefile has changed: targets may need to be rebuilt."
+	@echo "Building" $$(test -z "$(MAKECMDGOALS)" && echo "the default target" || echo "$(MAKECMDGOALS)")
+	@make -f Makefile $(MAKECMDGOALS)
 
 endif
 

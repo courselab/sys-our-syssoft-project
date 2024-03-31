@@ -4,7 +4,7 @@
 #
 #    This file is part of SYSeg, available at https://gitlab.com/monaco/syseg.
 
-SUBDIRS = tools eg extra try test replace 
+SUBDIRS = tools eg  try test replace extra
 
 ACLOCAL_AMFLAGS = -I m4
 

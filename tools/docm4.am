@@ -4,24 +4,40 @@
 #
 #    This file is part of SYSeg, available at https://gitlab.com/monaco/syseg.
 
+## 
+## Init docm4.am
+##
 
-# Init docm4.am
-EXTRA_DIST += $(docm4_files)
+EXTRA_DIST = $(docm4_files) $(docm4_files:%=%.m4)
 
-all-local: $(docm4_files)
+# make all docm4 files
 
-SUFFIXES = .m4
+all all-local: $(docm4_files)
 
-.m4:
-	@echo "Creating file $@"
+$(docm4_files) : % : %.m4 $(top_srcdir)/tools/docm4.m4 $(top_srcdir)/tools/bintools.m4
+	@echo "Creating file $@ from $<"
 	@m4 --include=$(top_srcdir)/tools --define=_TOOL_PATH=../$(top_srcdir)/tools $< > $@
 	@$(top_srcdir)/tools/syseg-reuse -y "$(COPYRIGHT_YEAR)" -c "$(COPYRIGHT_NAME) <$(COPYRIGHT_EMAIL)>" -x "--template=syseg-output" $@ > /dev/null 
 
-docm4_deps = $(top_srcdir)/tools/docm4.m4 $(top_srcdir)/tools/bintools.m4 
 
-$(docm4_files) : $(docm4_deps)
+# Invoke the 'clean' rule in each extra_sudir.
 
-clean-local:  $(docm4_files)
-# End docm4.am
+clean-local: 
+	for i in $(extra_subdirs); do\
+	  (cd $(srcdir)/$$i && if test -f Makefile; then $(MAKE) clean; fi)\
+	done
+	rm -f $(docm4_files) README
 
+
+# To prevent distribution from containing generated files
+
+dist-hook: 
+	for i in $(extra_subdirs); do\
+	  (cd $(distdir)/$$i && if test -f Makefile ; then $(MAKE) clean; fi)\
+	done
+	rm -f $(docm4_files) README
+
+##
+## End docm4.am
+##
 
