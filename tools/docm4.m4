@@ -285,33 +285,38 @@ define([DOCM4_CLOSING_WORDS],
 ## Update Makefile from Makefile.m4
 ##
 
-# Marked for deprecation, use DOCM4_ prefix.
-define([UPDATE_MAKEFILE],[DOCM4_UPDATE_MAKEFILE])
+# Marked for deprecation, use DOCM4_UPDATE, instead.
+define([UPDATE_MAKEFILE],[DOCM4_UPDATE])
+define([DOCM4_UPDATE_MAKEFILE],[DOCM4_UPDATE])
 
-define([DOCM4_UPDATE_MAKEFILE],
+define([DOCM4_UPDATE],
 [
-# This rule is not relevant for the implementation examples in this directory.
-# It is part of SYSeg mechanism to update Makefile from Makefile.m4 if the
-# latter has changed. If the source is from a distribution bundle, the lack
-# of an Makefile.m4 file inhibits the updating. 
+# Update docm4 files.
+#
+# These rules are not relevant for the source-code examples in this directory.
+# The are provided to automatically update docm4 files when their respective
+# sources change.
 
-ifndef UPDATED
+docm4_deps = DOCM4_DEPS
 
-Makefile_deps = DOCM4_DEPS
-
-Makefile : Makefile.m4 $(Makefile_deps) 
+Makefile : Makefile.m4 $(docm4_deps) 
 	@path=$$(pwd) ; dir=$${path##*/};\
-	if ! test -f .dist; then\
-	   make -C .. $$dir/Makefile;\
-	fi
-	@echo "Makefile has changed: targets may need to be rebuilt."
+	 make -C .. $$dir/Makefile;
+	@echo "syseg>>: Makefile has changed: all targets may need to be rebuilt."
 	@echo "Building" $$(test -z "$(MAKECMDGOALS)" && echo "the default target" || echo "$(MAKECMDGOALS)")
 	@make -f Makefile $(MAKECMDGOALS)
 
-endif
+dnl Other supported files in addition to Makefile
+docm4_supported_files = README 
 
-updatem4:
-	make -C ..
+$(docm4_supported_files): % : %.m4 $(docm4_deps)
+	@path=$$(pwd) ; dir=$${path##*/}; make -C .. $$dir/$(*) 
+
+updatem4: Makefile
+#	@path=$$(pwd) ; dir=$${path##*/}; make -C .. $$(for i in $(docm4_supported_files); do test -f $$dir/$$i.m4 && echo "$$dir/$$i" ; done)
+	@make $(docm4_supported_files)
+
+# End of update docm4 files.
 
 ])
 
