@@ -179,6 +179,7 @@ syseg_check_prog_warn([readelf],[readelf],[binutils])
 syseg_check_prog_warn([nasm],[nasm],[nasm])
 syseg_check_prog_fail([Git],[git],[git])
 syseg_check_prog_fail([Bash],[bash],[bash])
+syseg_check_prog_fail([m4],[m4],[m4])
 
 syseg_check_git_config()
 
