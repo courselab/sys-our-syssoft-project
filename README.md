@@ -94,21 +94,20 @@ Build and Install
 
  Feel free to open and issue at the version-control repository.
 
- The file 'AUTHORS' lists all contributors and acknowledgments, with
+ The file `AUTHORS` lists all contributors and acknowledgments, with
  respective contact information.
 
  I have a matter
  ------------------------------
 
  SYSeg is a work in progress and, as such, may contain suboptimal code and
- potential innacuracy in technical explanations resulting of reliance on
- imprecise or misleading references. If you ever detect one such problem,
- it would be great if you could drop the author a note.
+ potential technical innacuracies resulting of reliance on imprecise or misleading
+ references. If you ever detect one such problem, it would be great if you could 
+ drop the author a note.
  
  If it is not much trouble, please open an issue at the repository and
- apply it the lable 'matter'. There, explain what should be improved.
-
- Well, if you are in the mood of submitting a PR/MR, that would be great!
+ apply it the lable 'matter'. There, explain what should be improved
+ (well, if you are in the mood of submitting a PR/MR, that would be great!)
 
  Licensing
  -----------------------------
@@ -118,10 +117,10 @@ Build and Install
 
  SYSeg is free software and can be distributed under the terms of GNU General
  Public License version 3 of the license or, at your discretion, any later 
- version. Third-party source files distributed along with SYSeg are made 
- covered by their respective licenses, as annotated in each individual file.
+ version. Third-party source files distributed along with SYSeg are  covered 
+ by their respective licenses, as annotated in each individual file.
 
- See the terms of each license under the directory LICENSES. 
+ See the terms of each license under the directory `LICENSES`. 
 
  
  
