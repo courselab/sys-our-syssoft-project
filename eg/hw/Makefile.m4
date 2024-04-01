@@ -25,8 +25,6 @@ bin = kh eg-00.bin eg-00-r1.bin eg-00-r2.bin eg-01.bin eg-01-r1.bin eg-01-r2.bin
 
 binx =  egx-01.bin
 
-UPDATE_MAKEFILE
-
 all : $(bin) $(binx)
 
 ###########################################################                                    
@@ -415,5 +413,7 @@ clean-extra:
 	rm -f *~ \#*
 
 DOCM4_BINTOOLS
+
+UPDATE_MAKEFILE
 
 

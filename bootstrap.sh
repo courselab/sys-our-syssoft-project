@@ -13,12 +13,12 @@
 
 RECOMMENDED_FILES="AUTHORS NEWS ChangeLog" 
 
-REQUIRED_PROGRAMS="autoconf automake libtoolize"
+REQUIRED_PROGRAMS="autoconf automake libtoolize m4"
 
 for i in $REQUIRED_PROGRAMS; do
     if test -z "$(which $i)" ; then
-	echo "*** Program '$i' not found."
-	echo "    To install it, for instance, in Ubuntu:"
+	echo "*** Required program '$i' not found."
+	echo "    To install it, e.g. in an apt-based distribution:"
 	echo "    $ sudo apt install $i"
 	exit 1
     fi

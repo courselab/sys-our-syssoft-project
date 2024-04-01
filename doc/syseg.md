@@ -380,12 +380,13 @@
     make install
     ```
 
-    Don't run the commands above as super user.
+    Do noty run the commands above as super user.
 
 
-### I edited a `Makefile.m4` and need to update the corresponding Makefile
+### I edited a `Makefile.m4`, a `README.m4` or other docm4 source and now
+    I need to update the corresponding file.
  
-   Within the directory containing the edited `Makefile.am`, invoke:
+   Within the directory containing the edited m4 source, invoke:
    
    ```
    make updatem4
@@ -393,5 +394,6 @@
    
 ### I tried everything to no avail.
 
-    You're welcome to drop a message to the author.
+    You're welcome to drop a message to the author or to open an issue
+    at SYSeg repository.
 
