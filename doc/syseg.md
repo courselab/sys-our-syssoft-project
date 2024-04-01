@@ -129,10 +129,17 @@
  Setup Instructions (IMPORTANT)
  ------------------------------
  
- Some examples in SYSeg need auxiliary artifacts which must be built beforehand.
+ Some examples in SYSeg need auxiliary artifacts which must be built 
+ beforehand. To that end, follow this sequence of steps.
 
- If you have obtained SYSeg source from the its official VCS repository (i.e.
- you have cloned it from the mainstream Git repository), then execute the 
+ 1) Bootstrap the prject source.
+
+ Skip this step if you have downloaded SYSeg as distribution bundle (usually 
+ in the form of a compressed 'tar' archive file), rather than from its Git 
+ repository.
+
+ In case you have obtained SYSeg source from the its official VCS  (i.e. you 
+ have cloned it from the mainstream Git repository), then execute the 
  following script, found at the top of the project's source tree:
 
  ```
@@ -150,10 +157,9 @@
  On the other hand, if you have obtained the software in the form a
  pre-initialized distribution bundle, usually as a tarball, you should
  already have the  script `configure` pre-built and thus you will not need
- Autotools (you may then safely skip the Autotools installation step above).
+ to recriate it.
 
- Either way, the bootstrap script will create the configuration script
- named `configure`.
+ 2) Execute the configuration script
 
  Perhaps you are already familiar with the GNU build system but, if not, no
  worries. The `configure` script is meant to check if your system meets all
@@ -171,6 +177,8 @@
  platform. If it complains about missing pieces of software, install them 
  as needed and rerun `configure`. The file `syseg.log` contains a summary
  of the last execution of the configuration script.
+
+ 3) Build and install SYSeg.
 
  Next, build the software with
 
@@ -231,7 +239,12 @@
  changes to that work. Being your project a derivative work, you share its
  copyright with the copyright holder of the original work that you modified.
 
- The proper way to handle this shared authorship is to keep any copyright
+ (Side note: if you are developing your project under a work contract, then, 
+ depending on its terms, it is possible that your contractor is entitled to
+ claim the copyright. If in doubt, it is a good ideia to clarify with your 
+ contractor.)
+ 
+ The proper way to handle this shared rights is to keep any copyright
  and licensing notice present in the material, and add your name as an
  additional copyright holder. Also, bear in mind that you may only redistribute
  your derivative work in accordance with the license of the original work ---
@@ -243,7 +256,7 @@
  you can use to export files from SYSeg to your project. You can invoke the
  script like this
 
-     `tools/syseg-export <original-file> <destination-directory>`
+     tools/syseg-export <original-file> <destination-directory>
 
  The script will copy the original file into the destination directory
  and change the copyright notice (the comments at the top of the file)
@@ -268,7 +281,7 @@
  scripts to prepare bootstrap code and directions to deliver the activities
  through a VCS repository.
 
- If you reuse SYSeg code either in your classes or implementation project, you
+ If you reuse SYSeg code in either your classes or implementation project, you
  are kindly invited to drop the author a message. It's always interesting to
  know who else is exploring the material.
 
@@ -286,39 +299,70 @@
  Moreover, as explained before, if you just copy the files, this may result
  in your project having legally misleading copyright and licensing information.
 
- Instead, proceed as indicated in the 'README' file in respective directory.
+ Instead, proceed as indicated in the `README` file in respective directory.
 
- Unless otherwise indicated, the basic workflow to start working with the
- SYSeg programming exercise requires you to use the script
+ EXERCISE DEVELOPMENT WORKFLOW 
 
-    `tools/syseg-project <some-path>/<project-name>`
+ Unless otherwise indicated, proceed as follow to prepare and deliver the 
+ programming exercise.
 
- to create a new project for you to solve the programming exercise. The script
- should create a directory named after your project name, and populate it with
- scripts, data files, documentation files and other resources required for the
- bootstrap code to work from a stand-alone directory outside the SYSeg source
- directory tree.
+ 1) Set up the project directory.
 
- Then, if a given implementation exercise provides some bootstrap code for you
+ If asked to deliver your exercise as a Git repository, please clone it
+ locally and follow these steps. 
+ 
+ If your source tree is in `<project-dir>`, the command
+
+    tools/syseg-project <some-path>/<project-dir>
+
+ will set up a new project for you to solve the programming exercise. 
+ 
+ The script should populate your source tree with scripts, data files, 
+ documentation files and other resources required for the boilerplate 
+ code to work from a stand-alone directory, outside the SYSeg source 
+ directory tree. 
+
+ The subdirectory `<project-dir>/.tools` will contain several tools which
+ you are suposed to use while developing the implementation challenge.
+
+ Please, read the complementary documentation in
+
+      <project-dir>/.tools/readme.md
+
+ for detailed directions on how to edit files and to deliver the project.
+
+ 2) Export the exercise
+
+ Having completed the set up as described above, you should export the exercise
+ source files into your project directory. You should repeat step 2 for every
+ exercise you decide to try.
+
+ If a given implementation exercise provides some bootstrap code for you
  to build upon, its specification will instruct you to export the code from
- SYSeg into your newly created project using the aforementioned export facility.
- Usually, the directory containing the exercise should provide you with a
- Makefile implementing a rule specifically to assist you in this procedure:
+ SYSeg into your project directory using the aforementioned export facility.
+ Usually, the directory containing the exercise will provide you with a
+ Makefile implementing a rule specifically to assist you in this procedure.
+ Withing the SYSeg exercise directory, run
 
-
-   `make export` 
-
+  
+      make export 
+  
  The command should create a tarball within the current directory containing
- all the files relevant for that exercise. You should then copy/move the tarball
- into your project directory and uncompress it there. Enter the newly created
- subdirectory of your project and develop the implementation challenge.
+ all the files relevant for that exercise. You should then copy/move the 
+ tarball into your project directory and uncompress it there. This should
+ create a subdirectory under `<project-dir>` with all source files.
 
- For convenience, in case of usage in a guided instruction program, the
- directions in the file `README` copied into your new project directory will
- suggest you to deliver your work by committing your changes into a Git
- repository, and tagging int with a delivery identifier. If not otherwise
+ Enter the newly created subdirectory and develop the implementation challenge.
+
+ 3) Deliver the exercise
+
+ This step applis in case SYSeg is used in an instruction program.
+
+ The directions in the file `README` copied into your new exercise directory 
+ will suggest you to deliver your work by committing your changes into your Git
+ repository, and tagging it with a delivery identifier. If not otherwise
  specified by the instructor, use the tag name 'done' for the first delivery.
- If you need to submit a revised version, use the 'rev1',  'rev2' and so on).
+ If you need to submit a revised version, use the 'rev1',  'rev2' and so on.
 
  To deliver and tag your project:
 
