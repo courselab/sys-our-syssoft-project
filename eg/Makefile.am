@@ -10,11 +10,11 @@
 
 # Name the subdirs in this section.
 
-extra_subdirs = hw abi build make format run real bl tyos crt tyos32 posix foo
+extra_subdirs = hw abi build make format run real bl tyos crt tyos32 posix 
 
 # List of files that should be created from the source m4 files.
 
-docm4_files = README abi/README abi/Makefile format/Makefile format/README run/Makefile run/README hw/README hw/Makefile real/README real/Makefile build/README build/Makefile make/README rop/README rop/Makefile bl/Makefile bl/README tyos/README tyos/Makefile crt/Makefile crt/README tyos32/Makefile tyos32/README posix/README posix/Makefile foo/Makefile foo/README
+docm4_files = README abi/README abi/Makefile format/Makefile format/README run/Makefile run/README hw/README hw/Makefile real/README real/Makefile build/README build/Makefile make/README rop/README rop/Makefile bl/Makefile bl/README tyos/README tyos/Makefile crt/Makefile crt/README tyos32/Makefile tyos32/README posix/README posix/Makefile 
 
 ##
 ## No need to change this
