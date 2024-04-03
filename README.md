@@ -18,36 +18,28 @@
  programming exercises intended to illustrate general concepts and techniques 
  related to system software design and implementation. 
 
-About
--------------------------------------------
+ About
+ -------------------------------------------
  
  SYSeg has been compiled from class notes in undergraduate courses in
  Computer Science and Engineering, and is meant to  be useful for students
- and instructors exploring low-level programming.
+ and instructors interested in low-level programming.
 
- Covered topics include code examples exploring
- 
-  - runtime system _(shared/dynamic libraries,  API implementation etc.)_
-  
-  - application binary interface _(calling conventions, memory alignment etc.)_
-  
-  - program build chain _(preprocessor, compiler, assembler, linker etc.)_
-  
-  - program execution _(dynamic linking, relocation, position-independent-code etc.)_
-  
-  - build automation systems _(make, code portability, autoconf/automake etc.)_
-  
-  - operating systems implementation: _(hardware interface, POSIX API, etc.)_
-  
-  - and other related subjects.
+ The collection addresses concepts such as application binary interface
+ (ABI), runtime system, program build chain, operating systems and related
+ subjects, with source-code examples illustrating the implementation of
+ shared libraries, dynamic linking, address relocation, position-independent
+ code, POSIX API, file systems, build automation, among other topics.
 
  SYSeg official repository is at https https://gitlab.com/monaco/syseg.
 
+ Currently, the material is focused on the x86 platform.
 
-Build and Install
+
+ Quick start
  -----------------------------------------------
 
- Before you dig into the examples, read this.
+ Before you dig into the contents, read this.
  
  Most code examples and programming exercises require auxiliary artifacts 
  (including the documentation!) which must be built beforehand. 
@@ -62,10 +54,12 @@ Build and Install
 
  **IMPORTANT**
 
- In case you have rushed through this file and missed some detail, 
- please do take notice of the directions above. 
+ In case you have rushed through this file and has not been convinced to read
+ the essential documentation, please, this is an encouragement note:
 
- They'll assuredly save you time, should you want to try SYSeg.
+ **please, do read `doc/syseg.md`**
+
+ It'll assuredly save you time.
 
  This file is named `README` for a reason.
 
@@ -83,7 +77,6 @@ Build and Install
 
  Each subdirectory contains a `README` file further explaining its contents.
  
-
  Contributing
  ------------------------------
  

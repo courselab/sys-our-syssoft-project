@@ -70,19 +70,22 @@
  Requirements
  ------------------------------
  
- SYSeg was designed to be executed on the GNU/Linux operating systems for
- the x86 hardware platform (aka the standard PC computer).
+ SYSeg was designed to be executed on the GNU/Linux operating systems for the
+ x86 hardware platform (aka the standard PC computer). It should presumably
+ work with other POSIX OSes on x86-based computers as well.
 
  WINDOWS AND MAC USERS
  
- There have been reports of users being able to try SYSeg on Linux running in 
- a virtual machine over Microsoft Windows, as as well on WSL (Windows Subsystem
- for Linux). 
-
- The examples should work on MacOS, according to a few accounts.
-
- None of these configurations have been systematically tested, though.
-
+ There have been reports of users being able to try SYSeg either on Linux
+ running in a virtual machine over Microsoft Windows, or on WSL (Windows
+ Subsystem for Linux) --- although not always smoothly. None of those
+ configurations have been systematically tested.  If you decide to try a
+ setup like those, feedback will be much appreciated.
+ 
+ The examples should work on MacOS too, according to a few accounts,
+ specifically for x86-based computers. Low-level platform-dependent code
+ specifically to i386 processors will not work as expected.
+ 
  If you decide to try a setup like those, feedback will be much appreciated.
 
  DEPENDENCIES
