@@ -16,6 +16,10 @@ dnl       the build instructions in the README file at the top of SYSeg's source
 dnl       tree (yep, it's called README for a reason).
 
 include(docm4.m4)dnl
+include(syseconf.m4)dnl
+
+tell:
+	@echo FCF_PROTECTION
 
 #
 # Code examples
