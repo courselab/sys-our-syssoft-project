@@ -25,6 +25,9 @@ AC_SUBST([COPYRIGHT_YEAR],["2021"])
 AC_SUBST([COPYRIGHT_NAME],["Monaco F. J."])
 AC_SUBST([COPYRIGHT_EMAIL],["monaco@usp.br"])
 
+dnl Canonical system type
+
+AC_CANONICAL_HOST
 
 dnl
 dnl Check for programs and libraries
@@ -108,6 +111,63 @@ m4_define([build_notes_git],
  
 ])
 
+m4_define([build_notes_architecture],
+[
+
+ IMPORTANT NOTICE: Build architecture is not x86_64
+ --------------------------------------------------
+
+ SYSeg content is targeted to the x86_64 architecture.
+ 
+ You are building SYSeg on an a $host_cpu based hardware and, as result, some
+ architecture-dependent code examples will not be supported. You can still
+ explore SYSeg, though, as the source that is not hardware-specific should
+ (hopefully) work fine.
+
+ Bear in mind that some options passed to compilers, assemblers, linkers
+ and other build chain components may not apply for $host_cpu. If you have
+ any trouble building the examples, we kindly ask you please to report
+ (if possible, by opening an issue at the repository; otherwise an e-mail
+ would be good enough). See file CONTRIBUTING.md if you would like to suggest
+ some fix or improvement. Thanks.
+
+])
+
+m4_define([build_notes_cfp],
+[
+
+ IMPORTANT NOTICE: -fcf-protection not supported
+ --------------------------------------------------
+
+ GCC flag '-fcf-protection' is not supported in your build platform. This may
+ happen, for instance, if you are building SYSeg in an architecture different
+ from x86_64 (yours seems to be $build_cpu). This is a known issue and there
+ are plans to improve the portability of example code. In the mean time, though,
+ as a workaround, you may manually remove the flag from compilation commands
+ wherever it is used (check the compilation error messages). Sincere thanks for
+ your consideration.
+
+])
+
+m4_define([build_notes_so],
+[
+
+ IMPORTANT NOTICE: build platform is not GNU/Linux
+ --------------------------------------------------
+
+ SYSeg source code examples were originally developed in GNU/Linux,
+ and it seems you are building it on a different OS ($build_os). 
+
+ In principle, SYSeg examples should work in any POSIX compliant
+ operating system, but this has not been systematically tested.
+ If your OS supports a POSIX runtime, you are safe to go; just bear
+ this notice in mind. If you have any trouble trying SYSeg in a
+ non GNU/Linux system, you are encouraged to report (if possible,
+ by opening and issue at the repository).
+
+])
+
+
 rm -f syseg.log
 
 dnl syseg_check_prog_warn(macro, program, install)
@@ -157,14 +217,38 @@ AC_MSG_ERROR([Fix the above errors and re-run this script]))
 ])
 
 
-dnl We currently require the compiler to support some specific functionality;
-dnl build should fail otherwise. 
+dnl syseg_check_architecture()
 
+m4_define([syseg_check_architecture],
+[
+AS_IF([test x"$build_cpu" == x"x86_64"],,
+AC_MSG_WARN(["*** Build platform is not x86_64"])
+echo "[build_notes_architecture]" >> syseg.log)
+])
+
+dnl syseg_check_os
+
+m4_define([syseg_check_os],
+[
+AS_IF([test x"$build_cpu" == x"x86_64"],,
+AC_MSG_WARN(["*** Build platform is not GNU/Linux"])
+echo "[build_notes_so]" >> syseg.log)
+])
+
+
+dnl We currently require the compiler to support some specific functionality;
 
 AX_CHECK_COMPILE_FLAG(
 	[-fcf-protection],,
-	[AC_MSG_ERROR([*** -fcf-protection not supported by compiler (gcc too old?)])]
-	)
+	[
+	  AC_MSG_WARN([*** -fcf-protection not supported by compiler])
+
+	  AS_IF([test x"$build_cpu" == x"x86" || test x"$build_cpu" == x"x86_64"],
+	    AC_MSG_ERROR([       GCC version is probably too old maybe upgrade it?]),
+	     AC_MSG_WARN([    Possibly not applicable to your build platform ($build_cpu)])
+	     echo ["build_notes_cfp"] >> syseg.log
+	     )
+	])
 
 AX_GCC_FUNC_ATTRIBUTE([naked])
 if test $ax_cv_have_func_attribute_naked = "no"; then
@@ -190,7 +274,12 @@ syseg_check_prog_fail([pipx],[pipx],[pipx])
 syseg_check_reuse([$HOME/.syseg/bin/reuse],[reuse-tool]) 
 
 
+dnl Check for architecture and operating system
 
+syseg_check_architecture()
+syseg_check_os()
+dnl AS_ECHO(["CPU    is $build_cpu"])
+dnl AS_ECHO(["          $build_os"])
 
 dnl Alternative short name used for install prefixes etc.
 
@@ -244,3 +333,4 @@ dnl Save some data about the project for later user by some scripts.
 
 echo AC_PACKAGE_VERSION > .version
 echo $PWD > .srcdir
+
