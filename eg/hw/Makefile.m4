@@ -189,7 +189,7 @@ eg-04-alpha.1.o eg-04-alpha.2.o eg-04-beta.o eg-04-beta+bug.o eg-04-beta.1.o : %
 	as --32 $< -o $@
 
 eg-04-alpha.s  eg-04-alpha.1.s eg-04-alpha.2.s eg-04-beta.s eg-04-beta+bug.s eg-04-beta.1.s : %.s : %.i
-	gcc -m16 -O0 -Wall -fno-pic -fno-asynchronous-unwind-tables -fcf-protection=none -S $< -o $@
+	gcc -m16 -O0 -Wall -fno-pic -fno-asynchronous-unwind-tables NO_CF_PROTECT -S $< -o $@
 
 eg-04-alpha.i eg-04-alpha.1.i eg-04-alpha.2.i eg-04-beta.i eg-04-beta+bug.i eg-04-beta.1.i : %.i : %.c
 	cpp $< -I. -o $@
@@ -223,8 +223,9 @@ eg-04.bin : %.bin : %.o %.ld
 eg-04.o : %.o : %.s
 	as --32 $< -o $@
 
+# (?) Does cf-protection makes any difference here?
 eg-04.s : %.s : %.i %.h
-	gcc -m16 -O0 -Wall -fno-pic -fno-asynchronous-unwind-tables -fcf-protection=none -S $< -o $@
+	gcc -m16 -O0 -Wall -fno-pic -fno-asynchronous-unwind-tables NO_CF_PROTECT -S $< -o $@
 
 eg-04.i : %.i : %.c
 	cpp $< -I. -o $@
@@ -236,7 +237,7 @@ endif
 
 ifeq ($(ALT),1)
 eg-04.bin : %.bin : %.c %.ld
-	gcc -m16 -O0 -Wall -fno-pic -fcf-protection=none -I. -nostdlib -T $*.ld -Wl,--orphan-handling=discard  $< -o $@
+	gcc -m16 -O0 -Wall -fno-pic NO_CF_PROTECT -I. -nostdlib -T $*.ld -Wl,--orphan-handling=discard  $< -o $@
 endif
 
 # Using linker script to define entry, flat binary and boot signature,
@@ -270,10 +271,10 @@ endif
 # Here we do it in an ad hoc way using the header file.
 
 eg-05.s : %.s : %.c %.h 
-	gcc -m16 -O0 -I. -Wall -fno-pic -fcf-protection=none  -S $< -o $@
+	gcc -m16 -O0 -I. -Wall -fno-pic   -S $< -o $@
 
 eg-05_utils.s  : %_utils.s : %_utils.c 
-	gcc -m16 -O0 -I. -Wall -fno-pic  -fcf-protection=none -S $< -o $@
+	gcc -m16 -O0 -I. -Wall -fno-pic   -S $< -o $@
 
 eg-05.o eg-05_utils.o  : %.o : %.s
 	as --32 $*.s -o $@
@@ -288,10 +289,10 @@ eg-05.bin: %.bin : %.o %_utils.o %.ld
 ## This is a GCC feature.
 
 eg-06.s : %.s : %.c %.h 
-	gcc -m16 -O0 -I. -Wall -fno-pic -fcf-protection=none  -S $< -o $@
+	gcc -m16 -O0 -I. -Wall -fno-pic   -S $< -o $@
 
 eg-06_utils.s  : %.s : %.c 
-	gcc -m16 -O0 -I. -Wall -fno-pic  -fcf-protection=none -S $< -o $@
+	gcc -m16 -O0 -I. -Wall -fno-pic   -S $< -o $@
 
 eg-06.o eg-06_utils.o  : %.o : %.s
 	as --32 $< -o $@
@@ -319,13 +320,13 @@ eg-06.bin: %.bin : %_rt0.o %.o %_utils.o %.ld
 ifndef ALT
 
 eg-07.s : %.s : %.c %.h 
-	gcc -m16 -O0 -I. -Wall -fno-pic -fcf-protection=none  --freestanding -S $< -o $@
+	gcc -m16 -O0 -I. -Wall -fno-pic   --freestanding -S $< -o $@
 
 eg-07_utils.s  : %.s : %.c 
-	gcc -m16 -O0 -I. -Wall -fno-pic  -fcf-protection=none --freestanding -S $< -o $@
+	gcc -m16 -O0 -I. -Wall -fno-pic   --freestanding -S $< -o $@
 
 eg-07_rt0.s  : %.s : %.c 
-	gcc -m16 -O0 -I. -Wall -fno-pic  -fcf-protection=none -S $< -o $@
+	gcc -m16 -O0 -I. -Wall -fno-pic   -S $< -o $@
 
 eg-07.o eg-07_utils.o  eg-07_rt0.o : %.o : %.s
 	as --32 $*.s -o $@
@@ -340,10 +341,10 @@ endif
 ifeq ($(ALT),1)
 
 eg-07.bin  : %.bin : %.c %_utils.c  %.h | %_rt0.o %.ld
-	gcc -m16 -O0 -I. -Wall -fno-pic -fcf-protection=none  --freestanding -nostdlib -T $*.ld -Wl,--orphan-handling=discard $(filter %.c, $^) -o $@
+	gcc -m16 -O0 -I. -Wall -fno-pic NO_CF_PROTECT  --freestanding -nostdlib -T $*.ld -Wl,--orphan-handling=discard $(filter %.c, $^) -o $@
 
 eg-07_rt0.o : %_rt0.o : %_rt0.c 
-	gcc -m16 -O0 -I. -Wall -fno-pic -fcf-protection=none -c $(filter %.c, $^) -o $@
+	gcc -m16 -O0 -I. -Wall -fno-pic NO_CF_PROTECT -c $(filter %.c, $^) -o $@
 
 
 endif
@@ -354,13 +355,13 @@ endif
 ##
 
 eg-08.s : %.s : %.c stdio.h 
-	gcc -m16 -O0 -I. -Wall -fno-pic -fcf-protection=none  --freestanding -S $< -o $@
+	gcc -m16 -O0 -I. -Wall -fno-pic   --freestanding -S $< -o $@
 
 eg-08_utils.s  : %.s : %.c 
-	gcc -m16 -O0 -I. -Wall -fno-pic  -fcf-protection=none --freestanding -S $< -o $@
+	gcc -m16 -O0 -I. -Wall -fno-pic   --freestanding -S $< -o $@
 
 eg-08_rt0.s  : %.s : %.c 
-	gcc -m16 -O0 -I. -Wall -fno-pic  -fcf-protection=none -S $< -o $@
+	gcc -m16 -O0 -I. -Wall -fno-pic   -S $< -o $@
 
 eg-08.o eg-08_utils.o  eg-08_rt0.o : %.o : %.s
 	as --32 $*.s -o $@
@@ -394,10 +395,10 @@ egx-02.o: %.o : %.s
 	as --32 $< -o $@
 
 egx-02.s : %.s : %.c
-	gcc -m16 -O0 -Wall -fno-pic -fno-asynchronous-unwind-tables -fcf-protection=none -S $< -o $@
+	gcc -m16 -O0 -Wall -fno-pic -fno-asynchronous-unwind-tables NO_CF_PROTECT -S $< -o $@
 
 egx-03.bin : eg-05.c eg-05.h eg-05.ld egx-03.c
-	gcc -m16 -O0 -Wall -fno-pic -fno-asynchronous-unwind-tables -fcf-protection=none -nostdlib  -I. -T eg-05.ld eg-05.c egx-03.c -o $@
+	gcc -m16 -O0 -Wall -fno-pic -fno-asynchronous-unwind-tables NO_CF_PROTECT -nostdlib  -I. -T eg-05.ld eg-05.c egx-03.c -o $@
 
 .PHONY: clean clean-extra 
 

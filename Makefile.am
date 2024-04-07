@@ -4,6 +4,7 @@
 #
 #    This file is part of SYSeg, available at https://gitlab.com/monaco/syseg.
 
+
 SUBDIRS = tools eg  try test replace extra
 
 ACLOCAL_AMFLAGS = -I m4
@@ -28,3 +29,17 @@ EXTRA_GARBAGE = *~
 
 DISTCLEANFILES = $(DESTDIR).srcdir $(DESTDIR).version
 
+# Docm4 does not work with VPATH build.
+
+distcheck:
+	make dist
+	tar zxvf $(PACKAGE_TARNAME)-$(PACKAGE_VERSION).tar.gz
+	cd $(PACKAGE_TARNAME)-$(PACKAGE_VERSION)
+	@if make ; then\
+	  echo "==================================================";\
+          echo  $(PACKAGE_TARNAME)-$(PACKAGE_VERSION).tar.gz   ready for distribution;\
+	  echo "==================================================";\
+	  echo Note: VPATH build not available;\
+        else\
+	  echo "Distribution check failed";\
+	fi

@@ -8,16 +8,17 @@
 ## Init docm4.am
 ##
 
-EXTRA_DIST = $(docm4_files) $(docm4_files:%=%.m4)
+EXTRA_DIST = $(docm4_files) $(docm4_files:%=%.m4) 
 
 # make all docm4 files
 
 all all-local: $(docm4_files)
 
-$(docm4_files) : % : %.m4 $(top_srcdir)/tools/docm4.m4 $(top_srcdir)/tools/bintools.m4
-	@echo "Creating file $@ from $<"
-	@m4 --include=$(top_srcdir)/tools --define=_TOOL_PATH=../$(top_srcdir)/tools $< > $@
-	@$(top_srcdir)/tools/syseg-reuse -y "$(COPYRIGHT_YEAR)" -c "$(COPYRIGHT_NAME) <$(COPYRIGHT_EMAIL)>" -x "--template=syseg-output" $@ > /dev/null 
+$(docm4_files) : % : %.m4 $(top_srcdir)/tools/docm4.m4 $(top_srcdir)/tools/bintools.m4 $(top_builddir)/sysegconf.m4 
+	@echo "Creating file $(builddir)/$@ from $<"
+	@m4 --include=$(top_srcdir)/tools --define=_TOOL_PATH=../$(top_srcdir)/tools $< > $(builddir)/$@
+	@$(top_srcdir)/tools/syseg-reuse -y "$(COPYRIGHT_YEAR)" -c "$(COPYRIGHT_NAME) <$(COPYRIGHT_EMAIL)>" -x "--template=syseg-output" $@ > /dev/null  
+
 
 
 # Invoke the 'clean' rule in each extra_sudir.

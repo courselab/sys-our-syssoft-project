@@ -17,10 +17,7 @@ dnl       tree (yep, it's called README for a reason).
 
 include(docm4.m4)dnl
 
-all: 
-	@echo "Specify a target"
 
-UPDATE_MAKEFILE 
 
 #
 # Main examples and auxiliary examples
@@ -30,7 +27,7 @@ bin = eg-01 eg-02-int eg-02-char eg-02-implicit eg-02-var-int eg-02-var-char eg-
 bin : $(bin)
 
 
-BARE= -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fcf-protection=none
+BARE= -fno-pic -fno-pie -fno-asynchronous-unwind-tables NO_CF_PROTECT
 
 # Very simple example to illustrate the build steps
 
@@ -148,3 +145,4 @@ clean:
 	rm -f $(bin) *.o *.i *.a main *.s *~ f1 f2 f
 
 DOCM4_BINTOOLS
+UPDATE_MAKEFILE 
