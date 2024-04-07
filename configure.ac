@@ -28,6 +28,8 @@ AC_SUBST([COPYRIGHT_EMAIL],["monaco@usp.br"])
 dnl Canonical system type
 
 AC_CANONICAL_HOST
+AX_COMPILER_VERSION
+
 
 dnl
 dnl Check for programs and libraries
@@ -133,19 +135,29 @@ m4_define([build_notes_architecture],
 
 ])
 
+
 m4_define([build_notes_cfp],
 [
 
- IMPORTANT NOTICE: -fcf-protection not supported
+ Notice: -fcf-protection not supported
  --------------------------------------------------
 
- GCC flag '-fcf-protection' is not supported in your build platform. This may
- happen, for instance, if you are building SYSeg in an architecture different
- from x86_64 (yours seems to be $build_cpu). This is a known issue and there
- are plans to improve the portability of example code. In the mean time, though,
- as a workaround, you may manually remove the flag from compilation commands
- wherever it is used (check the compilation error messages). Sincere thanks for
- your consideration.
+ GCC flag '-fcf-protection' is not supported in your build platform and thus
+ will be disabled across the entire project. This flag is used by some examples
+ to improve the readability of machine code disassembling, by removing some
+ extra instructions where they can be safely suppressed.
+
+ The flag may be unavailable, for instance, if you are building SYSeg in an
+ architecture different from x86_64, where it is not needed, anyway. On the
+ other hand, if the build platform is a x86_64, than it is possible that your
+ GCC is of a too old version. You may upgrade GCC to a newer version that
+ supports the flag, or you may safely go on with your current version, with
+ the harmless drawback of having the extra instruction in the machine code.
+
+ Detected build platform: $build_cpu on $build_os, $compiler $ax_cv_c_compiler_version
+
+ If you find any related problem, please, consider opening an issue a the
+ project repository. 
 
 ])
 
@@ -168,7 +180,31 @@ m4_define([build_notes_so],
 ])
 
 
-rm -f syseg.log conf.m4
+m4_define([build_notes_gcc],
+[
+
+ Notice: compiler is not GCC
+ --------------------------------------------------
+
+ There are several examples in SYSeg which assume that the compiler is GCC.
+ Some rely on specific GCC command line options, others break down the
+ disassembling of machine code on the premise it was produced by GCC.
+ 
+ Bear in mind that such examples may not work as expected, or may fail to
+ build entirely.
+
+ Detect compiler is $compiler $ax_cv_c_compiler_version.
+
+])
+
+rm -f syseg.log sysegconf.m4
+
+dnl update sysegconf.m4
+
+m4_define([setconf],
+[
+  echo "x_define([[$1]],[[$2]])" | sed 's/x_//'>> sysegconf.m4
+])
 
 dnl syseg_check_prog_warn(macro, program, install)
 
@@ -203,17 +239,37 @@ AC_MSG_NOTICE($ac_abs_confdir)
 AC_MSG_ERROR([Fix the above errors and re-run this script]))
 ])
 
+dnl syseg_check_gcc()
+
+m4_define([syseg_check_gcc],
+[
+  AS_IF([test x"$compiler" != x"gcc"], [echo "build_notes_gcc" >> syseg.log])
+    
+  setconf([GCC],[$compiler])
+  setconf([GCC_VERSION],[$ax_cv_c_compiler_version])
+])
+
+
+dnl Collect project info for docm4
+
+m4_define([syseg_get_proj_info],
+[
+  setconf([SRC_PATH],[`pwd`])
+])
+
 dnl syseg_check_git_config(macro, program, install)
 
 m4_define([syseg_check_git_config],
 [
+AC_MSG_CHECKING([whether Git user and e-mail are set])
 user_name=`git config user.name`
 user_email=`git config user.email`
 AS_IF([test x"$user_name" == x"" || test x"$user_email" == x""],
 AC_MSG_WARN([*** Git user and email not set.])   
 echo "[build_notes_git]" >> syseg.log
 cat syseg.log
-AC_MSG_ERROR([Fix the above errors and re-run this script]))
+AC_MSG_ERROR([Fix the above errors and re-run this script]),
+AC_MSG_RESULT([yes]))
 ])
 
 
@@ -221,47 +277,50 @@ dnl syseg_check_architecture()
 
 m4_define([syseg_check_architecture],
 [
-AS_IF([test x"$build_cpu" == x"x86_64"],,
-AC_MSG_WARN(["*** Build platform is not x86_64"])
-echo "[build_notes_architecture]" >> syseg.log)
+AC_MSG_CHECKING([whether build architecture is x86_64])
+AS_IF([test x"$build_cpu" != x"x86_64"],
+      [AC_MSG_WARN(["*** Build platform is not x86_64"])
+       echo "[build_notes_architecture]" >> syseg.log],
+      [AC_MSG_RESULT([yes])])
 ])
 
 dnl syseg_check_os
 
 m4_define([syseg_check_os],
 [
-AS_IF([test x"$build_cpu" == x"x86_64"],,
-AC_MSG_WARN(["*** Build platform is not GNU/Linux"])
-echo "[build_notes_so]" >> syseg.log)
+AC_MSG_CHECKING([whether build OS is GNU/Linux])
+AS_IF([test x"$build_os" != x"linux-gnu"],
+      [AC_MSG_WARN(["*** Build platform is not GNU/Linux"])
+       echo "[build_notes_so]" >> syseg.log],
+       [AC_MSG_RESULT([yes])])
 ])
 
+
+syseg_check_gcc()
 
 dnl We currently require the compiler to support some specific functionality;
 
-m4_define([setconf],
-[
-  echo "x_define([[FCF_PROTECTION]],[[$1]])" | sed 's/x_//'>> sysegconf.m4
-])
-
 AX_CHECK_COMPILE_FLAG(
 	[-fcf-protection],
-	  [setconf([-fcf-protection])],
+	  [setconf([NO_CF_PROTECT],[-fcf-protection=none])],
 	[
 	  AC_MSG_WARN([*** -fcf-protection not supported by compiler])
 
-	  setconf()
+	  setconf([NO_CF_PROTECT],)
 
 	  AS_IF([test x"$build_cpu" == x"x86" || test x"$build_cpu" == x"x86_64"],
-	    AC_MSG_ERROR([       GCC version is probably too old maybe upgrade it?]),
-	     AC_MSG_WARN([    Possibly not applicable to your build platform ($build_cpu)])
-	     echo ["build_notes_cfp"] >> syseg.log
-	     )
+	    AC_MSG_WARN([       GCC version is probably too old maybe upgrade it?]),
+	     AC_MSG_WARN([    Possibly not applicable to your build platform ($build_cpu)]))
+	     
+	  echo "build_notes_cfp" >> syseg.log
 	])
 
 AX_GCC_FUNC_ATTRIBUTE([naked])
 if test $ax_cv_have_func_attribute_naked = "no"; then
 AC_MSG_ERROR([*** function attribute 'naked' not supported (gcc too old?)])
 fi
+
+syseg_get_proj_info()
 
 syseg_check_prog_warn([xorriso],[xorriso],[xorriso])
 syseg_check_prog_warn([qemu],[qemu-system-i386],[qemu-system-i386])
