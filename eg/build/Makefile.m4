@@ -17,10 +17,7 @@ dnl       tree (yep, it's called README for a reason).
 
 include(docm4.m4)dnl
 
-all: 
-	@echo "Specify a target"
 
-UPDATE_MAKEFILE 
 
 #
 # Main examples and auxiliary examples
@@ -148,3 +145,4 @@ clean:
 	rm -f $(bin) *.o *.i *.a main *.s *~ f1 f2 f
 
 DOCM4_BINTOOLS
+UPDATE_MAKEFILE 

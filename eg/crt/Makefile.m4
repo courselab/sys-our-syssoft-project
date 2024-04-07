@@ -113,7 +113,7 @@ eg-10.o: eg-10.s
 	as --32 $< -o $@
 
 eg-10.s : eg-10.c
-	gcc -S -m16 -O0 --freestanding -nostdlib -fno-pic -fcf-protection=none -fno-asynchronous-unwind-tables $< -o $@
+	gcc -S -m16 -O0 --freestanding -nostdlib -fno-pic NO_CF_PROTECT -fno-asynchronous-unwind-tables $< -o $@
 
 
 
@@ -131,7 +131,7 @@ eg-11.o : %.o : %.s
 	as --32 $< -o $@
 
 eg-11.s  : %.s : %.c
-	gcc -S -m16 -O0 --freestanding -nostdlib -fno-pic -fcf-protection=none -fno-asynchronous-unwind-tables $< -o $@
+	gcc -S -m16 -O0 --freestanding -nostdlib -fno-pic NO_CF_PROTECT -fno-asynchronous-unwind-tables $< -o $@
 
 
 #
@@ -148,7 +148,7 @@ eg-12.o eg-12-lib.o : %.o : %.s
 	as --32 $< -o $@
 
 eg-12.s eg-12-lib.s : %.s : %.c
-	gcc -S -m16 -O0 --freestanding -nostdlib -fno-pic -fcf-protection=none -fno-asynchronous-unwind-tables $< -o $@
+	gcc -S -m16 -O0 --freestanding -nostdlib -fno-pic NO_CF_PROTECT -fno-asynchronous-unwind-tables $< -o $@
 
 
 
@@ -166,7 +166,7 @@ eg-13.o eg-13-lib.o : %.o : %.s
 	as --32 $< -o $@
 
 eg-13.s eg-13-lib.s : %.s : %.c
-	gcc -S -m16 -O0 --freestanding -nostdlib -fno-pic -fcf-protection=none -fno-asynchronous-unwind-tables -I. $< -o $@
+	gcc -S -m16 -O0 --freestanding -nostdlib -fno-pic NO_CF_PROTECT -fno-asynchronous-unwind-tables -I. $< -o $@
 
 
 # libeg-13.a : eg-13-lib.o

@@ -58,7 +58,7 @@ $(binc:%=%.o) $(binc:%=%_utils.o) rt0.o :%.o: %.s
 	as --32 $< -o $@
 
 $(binc:%=%.s) $(binc:%=%_utils.s) rt0.s :%.s: %.c
-	gcc -m16 -O0 -I. -Wall -fno-pic -fcf-protection=none  --freestanding -S $< -o $@
+	gcc -m16 -O0 -I. -Wall -fno-pic NO_CF_PROTECT  --freestanding -S $< -o $@
 
 
 

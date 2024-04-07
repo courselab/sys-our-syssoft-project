@@ -23,7 +23,7 @@ bin = eg-01 eg-02
 WARN = -Wall -Wno-unused-result -Wno-parentheses
 
 CPP_FLAGS=  $(WARN) $(CPPFLAGS)
-C_FLAGS= -Og -m32 -fcf-protection=none  $(CFLAGS)
+C_FLAGS= -Og -m32 NO_CF_PROTECT  $(CFLAGS)
 LD_FLAGS= -m32 $(LDFLAGS)
 
 #

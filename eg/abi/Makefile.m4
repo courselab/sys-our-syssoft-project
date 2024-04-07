@@ -53,10 +53,10 @@ UPDATE_MAKEFILE
 #  -Qn		prevents gcc from outputing compiler metainformation e.g.
 #		the section .comment, which is not relevant in this context.
 
-CFLAGS_00 = -m32 -Wall -Wno-unused-but-set-variable -O0 -fno-pic -fno-pie -fcf-protection=none -fno-asynchronous-unwind-tables -Qn 
+CFLAGS_00 = -m32 -Wall -Wno-unused-but-set-variable -O0 -fno-pic -fno-pie NO_CF_PROTECT -fno-asynchronous-unwind-tables -Qn 
 LDFLAGS_00 = -m32 -Wall
 
-C_FLAGS = -Wall -Wno-unused-but-set-variable -O0 -fno-pic -fno-pie -fcf-protection=none -fno-asynchronous-unwind-tables -Qn
+C_FLAGS = -Wall -Wno-unused-but-set-variable -O0 -fno-pic -fno-pie NO_CF_PROTECT -fno-asynchronous-unwind-tables -Qn
 LD_FLAGS = -fno-pic -fno-pie -no-pie
 
 #

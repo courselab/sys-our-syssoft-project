@@ -50,10 +50,10 @@ boot.bin : $(boot_obj) boot.ld rt0.o
 	ld -melf_i386 --orphan-handling=discard  -T boot.ld $(boot_obj) -o $@
 
 bootloader.o utils.o  : %.o: %.c
-	gcc -m16 -O0 -I. -Wall -fno-pic -fcf-protection=none  --freestanding -c $<  -o $@
+	gcc -m16 -O0 -I. -Wall -fno-pic NO_CF_PROTECT  --freestanding -c $<  -o $@
 
 kernel.o : %.o : %.c
-	gcc -m32 -O0 -I. -Wall -fno-pic -fcf-protection=none  --freestanding -c $<  -o $@
+	gcc -m32 -O0 -I. -Wall -fno-pic NO_CF_PROTECT  --freestanding -c $<  -o $@
 
 init32.o : init32.S
 	as -32 $< -o $@

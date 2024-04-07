@@ -573,6 +573,6 @@ include(Makegyver.mk)
 ## ----------------------------------------------------------------------                  
 ])
 
-# sinclude(../sysegconf.m4)
+sinclude(../sysegconf.m4)
 
 divert(0)dnl

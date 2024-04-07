@@ -189,7 +189,7 @@ eg-04-alpha.1.o eg-04-alpha.2.o eg-04-beta.o eg-04-beta+bug.o eg-04-beta.1.o : %
 	as --32 $< -o $@
 
 eg-04-alpha.s  eg-04-alpha.1.s eg-04-alpha.2.s eg-04-beta.s eg-04-beta+bug.s eg-04-beta.1.s : %.s : %.i
-	gcc -m16 -O0 -Wall -fno-pic -fno-asynchronous-unwind-tables -fcf-protection=none -S $< -o $@
+	gcc -m16 -O0 -Wall -fno-pic -fno-asynchronous-unwind-tables NO_CF_PROTECT -S $< -o $@
 
 eg-04-alpha.i eg-04-alpha.1.i eg-04-alpha.2.i eg-04-beta.i eg-04-beta+bug.i eg-04-beta.1.i : %.i : %.c
 	cpp $< -I. -o $@
@@ -225,7 +225,7 @@ eg-04.o : %.o : %.s
 
 # (?) Does cf-protection makes any difference here?
 eg-04.s : %.s : %.i %.h
-	gcc -m16 -O0 -Wall -fno-pic -fno-asynchronous-unwind-tables -fcf-protection=none -S $< -o $@
+	gcc -m16 -O0 -Wall -fno-pic -fno-asynchronous-unwind-tables NO_CF_PROTECT -S $< -o $@
 
 eg-04.i : %.i : %.c
 	cpp $< -I. -o $@
@@ -237,7 +237,7 @@ endif
 
 ifeq ($(ALT),1)
 eg-04.bin : %.bin : %.c %.ld
-	gcc -m16 -O0 -Wall -fno-pic -fcf-protection=none -I. -nostdlib -T $*.ld -Wl,--orphan-handling=discard  $< -o $@
+	gcc -m16 -O0 -Wall -fno-pic NO_CF_PROTECT -I. -nostdlib -T $*.ld -Wl,--orphan-handling=discard  $< -o $@
 endif
 
 # Using linker script to define entry, flat binary and boot signature,
