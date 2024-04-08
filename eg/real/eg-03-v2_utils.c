@@ -6,9 +6,9 @@
  *    This file is part of SYSeg, available at https://gitlab.com/monaco/syseg.
  */
 
-#include <eg-03.h>
+#include <eg-03-v2.h>
 
-void  puts (const char *str)
+void __attribute__((naked, fastcall)) puts (const char *str)
 {
 
   short *video = (short *) VIDEO_MEMORY;
@@ -19,5 +19,7 @@ void  puts (const char *str)
       video[i] = (VIDEO_ATTRIBUTE << 8) + str[i];
       i++;
     }
+
+  __asm__("ret");
 
 }

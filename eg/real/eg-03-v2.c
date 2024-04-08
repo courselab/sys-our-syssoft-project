@@ -6,18 +6,13 @@
  *    This file is part of SYSeg, available at https://gitlab.com/monaco/syseg.
  */
 
-#include <eg-03.h>
+#include <eg-03-v2.h>
 
-void  puts (const char *str)
+int main()
 {
-
-  short *video = (short *) VIDEO_MEMORY;
-  int i = 0;
   
-  while (str[i])
-    {
-      video[i] = (VIDEO_ATTRIBUTE << 8) + str[i];
-      i++;
-    }
+  puts ("Hello world");
+
+  return 0;
 
 }

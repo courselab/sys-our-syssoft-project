@@ -13,7 +13,7 @@
 #define VIDEO_ATTRIBUTE 0X02
 
 
-void __attribute((naked, fastcall)) puts (const char *str);
+void puts (const char *str);
 
 
 

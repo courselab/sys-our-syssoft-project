@@ -6,18 +6,15 @@
  *    This file is part of SYSeg, available at https://gitlab.com/monaco/syseg.
  */
 
-#include <eg-03.h>
+#ifndef EG03_H
+#define EG03_H
 
-void  puts (const char *str)
-{
+#define VIDEO_MEMORY 0xb8000
+#define VIDEO_ATTRIBUTE 0X02
 
-  short *video = (short *) VIDEO_MEMORY;
-  int i = 0;
-  
-  while (str[i])
-    {
-      video[i] = (VIDEO_ATTRIBUTE << 8) + str[i];
-      i++;
-    }
 
-}
+void __attribute((naked, fastcall)) puts (const char *str);
+
+
+
+#endif
